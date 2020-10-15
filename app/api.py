@@ -298,7 +298,7 @@ def api(request):
                     return json.dumps({'response': 'Wrong method'}), 406
 
             if data['method'] == 'get_prev_month':
-                print('get_prev_month {}.{}'.format(int(data['month_n']) - 1, data['year']))
+                print('get_prev_month')
                 try:
                     method = data['button']
                     cal = Calendar()

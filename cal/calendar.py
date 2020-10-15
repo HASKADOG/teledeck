@@ -44,10 +44,13 @@ class Calendar():
         sale = 0
         try:
             print('current_m {}'.format(1 if month_n + 1 == 13 else month_n + 1))
-            if month_n + 1 == 13:
-                year_q = year + 1
+
+            if month_n == 0:
+                year_q = year - 1
+                month_n = 12
             else:
                 year_q = year
+
             month_db = Time.query.filter(extract('month', Time.date) == (1 if month_n + 1 == 13 else month_n + 1), extract('year', Time.date) == (year_q))
 
             for date in month_db:
