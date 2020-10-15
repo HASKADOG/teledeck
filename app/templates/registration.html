@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+    <section class="login_reg">
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <h1>Регистрация</h1>
+                    <form class="login_reg_form" action="" method="post" novalidate>
+                        {{ form.hidden_tag() }}
+                         <p>
+                            {{ form.email.label }}<br>
+                            {{ form.email(size=32) }}
+                        </p>
+                        <p>
+                            {{ form.password.label }}<br>
+                            {{ form.password(size=32) }}
+                        </p>
+                        <p>
+                            {{ form.password_confirm.label }}<br>
+                            {{ form.password_confirm(size=32) }}
+                        </p>
+
+                         <p>
+                            {{ form.phone_number.label }}<br>
+                            {{ form.phone_number(size=32) }}
+                        </p>
+                        <p>
+                            {{ form.is_entity.label }}<br>
+                            {{ form.is_entity(size=32, id="is_entity") }}
+                        </p>
+                        <div id="entity_block">
+                            <p>
+                                {{ form.entity_name.label }}<br>
+                                {{ form.entity_name(size=32, id="entity_name") }}
+                            </p>
+                            <p>
+                                {{ form.iin.label }}<br>
+                                {{ form.iin(size=32) }}
+                            </p>
+                            <p>
+                                {{ form.ogrn.label }}<br>
+                                {{ form.ogrn(size=32) }}
+                            </p>
+                        </div>
+                        <div id="personal_block">
+                            <p>
+                                {{ form.login.label }}<br>
+                                {{ form.login(size=32) }}
+                            </p>
+                                                    <p>
+                                {{ form.second_name.label }}<br>
+                                {{ form.second_name(size=32) }}
+                            </p>
+                                                    <p>
+                                {{ form.third_name.label }}<br>
+                                {{ form.third_name(size=32) }}
+                            </p>
+
+
+                        </div>
+                            <p>
+                                {{ form.ref_code.label }}<br>
+                                {{ form.ref_code(size=32) }}
+                            </p>
+
+                        <p>{{ form.submit() }}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}

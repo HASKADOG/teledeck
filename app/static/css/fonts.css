@@ -1,0 +1,53 @@
+@font-face {
+  font-family: "mont-black";
+  src: url("../fonts/Mont-Black.ttf"); }
+@font-face {
+  font-family: "mont-black-italic";
+  src: url("../fonts/Mont-BlackItalic.ttf"); }
+@font-face {
+  font-family: "mont-bold";
+  src: url("../fonts/Mont-Bold.ttf"); }
+@font-face {
+  font-family: "mont-bold-italic";
+  src: url("../fonts/Mont-BoldItalic.ttf"); }
+@font-face {
+  font-family: "mont-extra-light";
+  src: url("../fonts/Mont-ExtraLight.ttf"); }
+@font-face {
+  font-family: "mont-extra-light-italic";
+  src: url("../fonts/Mont-ExtraLightItalic.ttf"); }
+@font-face {
+  font-family: "mont-heavy";
+  src: url("../fonts/Mont-Heavy.ttf"); }
+@font-face {
+  font-family: "mont-heavy-italic";
+  src: url("../fonts/Mont-HeavyItalic.ttf"); }
+@font-face {
+  font-family: "mont-light";
+  src: url("../fonts/Mont-Light.ttf"); }
+@font-face {
+  font-family: "mont-light-italic";
+  src: url("../fonts/Mont-LightItalic.ttf"); }
+@font-face {
+  font-family: "mont-regular";
+  src: url("../fonts/Mont-Regular.ttf"); }
+@font-face {
+  font-family: "mont-regular-italic";
+  src: url("../fonts/Mont-RegularItalic.ttf"); }
+@font-face {
+  font-family: "mont-semibold";
+  src: url("../fonts/Mont-SemiBold.ttf"); }
+@font-face {
+  font-family: "mont-semibold-italic";
+  src: url("../fonts/Mont-SemiBoldItalic.ttf"); }
+@font-face {
+  font-family: "mont-thin";
+  src: url("../fonts/Mont-Thin.ttf"); }
+@font-face {
+  font-family: "mont-thin-italic";
+  src: url("../fonts/Mont-LightItalic.ttf.ttf"); }
+@font-face {
+  font-family: "test";
+  src: url("../fonts/Lemonada-VariableFont_wght.ttf"); }
+
+/*# sourceMappingURL=fonts.css.map */

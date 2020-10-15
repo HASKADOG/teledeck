@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="font_loader">
+    <div class="annonymous">a</div>
+    <div class="annonymous-bold">a</div>
+    <div class="annonymous-italic">a</div>
+    <div class="arimo">a</div>
+    <div class="arimo-bold">a</div>
+    <div class="arimo-italic">a</div>
+    <div class="cousine">a</div>
+    <div class="cousine-bold">a</div>
+    <div class="cousine-italic">a</div>
+    <div class="cuprum">a</div>
+    <div class="cuprum-bold">a</div>
+    <div class="cuprum-italic">a</div>
+    <div class="opensans">a</div>
+    <div class="opensans-bold">a</div>
+    <div class="opensans-italic">a</div>
+    <div class="philosopher">a</div>
+    <div class="philosopher-bold">a</div>
+    <div class="philosopher-italic">a</div>
+</div>
+
+
+<div class="lk-wrap login_reg">
+    <div class="container">
+        <div class="row">
+            <div class="col-5 login_reg_form" style="margin-bottom: 20px">
+                <h1>Редактировать объявление</h1>
+                <input type="text" id="track_code" hidden value="{{ ad.track }}">
+                <p>
+                    <label for="notify_email">Email для уведомлений:</label>
+                    <input type="text" id="notify_email" value="{{ ad.notify_email }}">
+                </p>
+
+                <p>
+                    <label for="is_entity">Организация?</label><br>
+                    <input type="checkbox" style="width: 40px" id="is_entity">
+                </p>
+                <div id="personal_block">
+                    <p>
+                        <label for="username">Имя</label>
+                        <input type="text" id="username" value="{{ ad.username }}">
+                    </p>
+
+                    <p>
+                        <label for="second_name">Фамилия</label>
+                        <input type="text" id="second_name" value="{{ ad.second_name }}">
+                    </p>
+
+                    <p>
+                        <label for="third_name">Отчество</label>
+                        <input type="text" id="third_name" value="{{ ad.third_name }}">
+                    </p>
+
+                </div>
+
+                <div id="entity_block">
+                    <p>
+                        <label for="entity_name">Наименование организации</label>
+                        <input type="text" id="entity_name">
+                    </p>
+
+                    <p>
+                        <label for="iin">ИИН</label>
+                        <input type="text" id="iin">
+                    </p>
+
+                    <p>
+                        <label for="ogrn">ОГРН</label>
+                        <input type="text" id="ogrn">
+                    </p>
+                </div>
+                <p>
+                    <label for="phone_number">Номер телефона</label>
+                    <input type="text" id="phone_number" value="{{ ad.individual_phone_number }}">
+                </p>
+
+                <div class="container promo_wrap"  style="padding-left: 0">
+                    <div class="row" style="padding: 0">
+                        <div class="col-7">
+                            <input type="text" id="promo" placeholder="Промокод">
+                        </div>
+                        <div class="col-5"  style="padding: 0">
+                            <button id="activate_promo">Активировать</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                </div>
+                <div class="col-7"></div>
+                                    <div class="container">
+                      <div class="row">
+                        <div class="col-4 calendar">
+                          <div class="container">
+                            <div class="row month_shifter">
+                              <div class="col-1 left">«</div>
+                              <div class="col-10 month"></div>
+                              <div class="col-1 right">»</div>
+                            </div>
+                            <div class="row">
+                              <div class="day_wrap">
+                                <div class="day" id="day1" data-price="1" data-available="1" data-date="1.8.2020">1</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day2" data-price="2" data-available="1" data-date="2.8.2020">2</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day3" data-price="3" data-available="1" data-date="3.8.2020">3</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day4" data-price="4" data-available="1" data-date="4.8.2020">4</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day5" data-price="5" data-available="1" data-date="5.8.2020">5</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day6" data-price="6" data-available="1" data-date="6.8.2020">6</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day7" data-price="7" data-available="1" data-date="7.8.2020">7</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day8" data-price="8" data-available="1" data-date="8.8.2020">8</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day9" data-price="9" data-available="1" data-date="9.8.2020">9</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day10" data-price="10" data-available="1" data-date="10.8.2020">10</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day11" data-price="11" data-available="1" data-date="11.8.2020">11</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day12" data-price="12" data-available="1" data-date="12.8.2020">12</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day13" data-price="13" data-available="1" data-date="13.8.2020">13</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day14" data-price="14" data-available="1" data-date="14.8.2020">14</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day15" data-price="15" data-available="1" data-date="15.8.2020">15</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day16" data-price="16" data-available="1" data-date="16.8.2020">16</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day17" data-price="17" data-available="1" data-date="17.8.2020">17</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day18" data-price="18" data-available="1" data-date="18.8.2020">18</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day19" data-price="19" data-available="1" data-date="19.8.2020">19</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day20" data-price="20" data-available="1" data-date="20.8.2020">20</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day21" data-price="21" data-available="1" data-date="21.8.2020">21</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day22" data-price="22" data-available="1" data-date="22.8.2020">22</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day23" data-price="23" data-available="1" data-date="23.8.2020">23</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day24" data-price="24" data-available="1" data-date="24.8.2020">24</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day25" data-price="25" data-available="1" data-date="25.8.2020">25</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day26" data-price="26" data-available="1" data-date="26.8.2020">26</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day27" data-price="27" data-available="1" data-date="27.8.2020">27</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day28" data-price="28" data-available="1" data-date="28.8.2020">28</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day29" data-price="29" data-available="1" data-date="29.8.2020">29</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day30" data-price="30" data-available="1" data-date="30.8.2020">30</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day31" data-price="31" data-available="1" data-date="31.8.2020">31</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day32" data-price="32" data-available="1" data-date="32.8.2020">32</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day33" data-price="33" data-available="1" data-date="33.8.2020">33</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day34" data-price="34" data-available="1" data-date="34.8.2020">34</div>
+                              </div>
+                              <div class="day_wrap">
+                                <div class="day" id="day35" data-price="35" data-available="1" data-date="35.8.2020">35</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 info_wrap">
+                          <!--<div class="added_day" id='day12_picked'>day12</div>-->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="chosen_days col">Выбранные дни</div>
+                                    <div class="clear col">Очистить</div>
+                                </div>
+                            </div>
+                          <div class="info">
+                            {% for added_day in days %}
+                                <div class="added_day" data-sale="0" data-date="{{ added_day[0] }}" id="{{ added_day[1] }}">{{ added_day[0] }}</div>
+                            {% endfor %}
+                          </div>
+                          <div class="price">
+                            Итоговая цена: <span id="price">{{ ad.price }}</span>
+                              <input type="text" id="price_input" hidden value="{{ ad.price }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                <div class="col-4 login_reg_form image_form">
+                <label for="font-choose">Шрифт:</label>
+<select id="font-choose" onchange="draw_text()">
+  <option value="annonymous" class="annonymous" selected>AnonymousPro</option>
+  <option value="arimo" class="arimo">Arimo</option>
+  <option value="cousine" class="cousine">Cousine</option>
+  <option value="cuprum" class="cuprum">Cuprum</option>
+  <option value="opensans" class="opensans">OpenSansCondensed</option>
+  <option value="philosopher" class="philosopher">Philosopher</option>
+</select><br>
+                <label for="template-choose">Шаблон:</label>
+
+<select id="template-choose" onChange="render(this, 0); draw_text(); sec_tmp()">
+  <option value="one" class="mont-b" selected>One</option>
+  <option value="two" class="mont-r">Two</option>
+  <option value="three" class="mont-b">Three</option>
+  <option value="four" class="mont-r">Four</option>
+</select><br>
+
+                    <label id="image_in_lb" for="image_in">Загрузить файл (1680*570)</label>
+<input type="file" style="border: none; margin-top: 10px" hidden onChange="merge()" data-buttonText="Загрузить картинку" id="image_in"><br>
+
+<input type="text" id="head" onchange="onfil(document.getElementById('image'))" placeholder="Заголовок">
+<select id="head-weight" onChange="change_weight(); draw_text()">
+  <option value="" class="head-regular" selected>Обычный</option>
+  <option value="-bold" class="head-bold">Жирный</option>
+  <option value="-italic" class="head-italic">Курсив</option>
+</select>
+<br>
+<input type="text" id="text_in_red" class="font-hider" onchange="onfil(document.getElementById('image'))" placeholder="Текст в красном">
+<select id="text_in_red-weight" class="font-hider" onChange="change_weight(); draw_text()">
+  <option value="" class="text_in_red-regular" selected>Обычный</option>
+  <option value="-bold" class="text_in_red-bold">Жирный</option>
+  <option value="-italic" class="text_in_red-italic">Курсив</option>
+</select>
+<br id="red_br" class="font-hider">
+<input type="text" id="body" onchange="onfil(document.getElementById('image'))" placeholder="Текст">
+<select id="body-weight" onChange="change_weight(); draw_text()">
+  <option value="" class="body-regular" selected>Обычный</option>
+  <option value="-bold" class="body-bold">Жирный</option>
+  <option value="-italic" class="body-italic">Курсив</option>
+</select>
+<br>
+<input type="text" id="legs" onchange="onfil(document.getElementById('image'))" placeholder="Текст 2">
+<select id="legs-weight" onChange="change_weight(); draw_text()">
+  <option value="" class="legs-regular" selected>Обычный</option>
+  <option value="-bold" class="legs-bold">Жирный</option>
+  <option value="-italic" class="legs-italic">Курсив</option>
+</select>
+<br>
+                    <label id="image_uniq_lb" for="image_uniq">Загрузить своё объявление (1920*1080)</label>
+<input type="file" style="border: none; margin-top: 10px" hidden onChange="uniq()" data-buttonText="Загрузить картинку" id="image_uniq"><br>
+<input type="text" hidden class="link" value="">
+
+</div>                <div class="col-8">
+                <canvas id="img" style="width: 100%; margin-top: 10px"></canvas><br></div>
+            <div class="col-5">                                                    <button id="edit">Редактировать и отправить на модерацию</button>
+</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src=" {{ url_for('static', filename='js/jcanvas.js') }} "></script>
+
+<script src=" {{ url_for('static', filename='js/img.js') }} "></script>
+{% endblock %}

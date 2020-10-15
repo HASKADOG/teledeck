@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Теледоска.рф</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+	    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <section class="header">
+            <div class="container-xl papka" style="">
+                <div class="row">
+                    <div class="col-2 header-logo">
+                        <img src="{{ url_for('static', filename='img/logo_efir_1.png') }}" class="header-logo-file" alt="">
+                    </div>
+                    <div class="col header-space-btw"></div>
+                    <div class="header-contact-number">
+                        <img src="{{ url_for('static', filename='img/header-logo.svg') }}" alt="" class="phone-icon">
+                        <a href="tel:+78432030303" class="phone-number">( 843 ) 203 - 03 - 30</a>
+                    </div>
+                    <div class="col-xl-5 col-lg-6 header-menu">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="menu-elem elem-one"><a href="/add_add" class="one">Создать объявление</a></div>
+                                <div class="menu-elem elem-two"><span class="two">Оплата</span></div>
+                                <div class="menu-elem elem-three"><span class="three">Продление</span></div>
+                                <div class="menu-elem elem-four"><span class="four">Редактирование</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-ham">
+                        <img src="{{ url_for('static', filename='img/burger.svg') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        	<div class="menuphka">
+							<div class=""><span class="">Создать объявление</span></div><br>
+							<div class=""><span class="">Оплата</span></div><br>
+							<div class=""><span class="">Продление</span></div><br>
+							<div class=""><span class="">Редактирование</span></div><br>
+							<div class="dualshock"><span class="">Закрыть меню</span></div><br>
+	        </div>
+
+        {% block content %}{% endblock %}
+
+
+		<section class="footer">
+		<div class="back">
+			<div class="container footer-wrap">
+
+				<div class="row d-xl-none d-lg-none moot" style="min-height: 60px;">
+					<div class="col-12 col-md-12 col-sm-12 col-xl header-menu">
+						<div class="container">
+							<div class="row justify-content-between">
+								<div class="menu-elem elem-one"><a href="/add_add" class="one-f">Создать объявление</a></div>
+								<div class="menu-elem elem-two"><span class="two-f">Оплата</span></div>
+								<div class="menu-elem elem-three"><span class="three-f">Продление</span></div>
+								<div class="menu-elem elem-four"><span class="four-f">Редактирование</span></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-xl-4 col-sm-12 col-md-12 header-contact-number">
+						<div class="container" style="padding-right: 0;">
+							<div class="row justify-content-end">
+								<div class="col-12 col-sm-12" style="text-align: right; padding-right: 8px;">
+									<img src="{{ url_for('static', filename='img/header-logo.svg') }}" alt="" class="phone-icon">
+									<a href="tel:+78432030303" style="color: white" class="phone-number">( 843 ) 203 - 03 - 30</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="row foot align-items-center">
+					<div class="col-lg-5 col-xl-4 col-md-6 col-sm-6 d-none d-sm-none d-md-block">
+						<div class="container schedule">
+							<div class="row align-items-end">
+								<div class="col comparison">
+									<div class="container">
+										<div class="row heading">
+											<div class="col bold">Время выхода объявлений:</div>
+											<div class="w-100"></div>
+											<div class="col light">на телеканале <span class="orange">«Эфир» – 3</span></div>
+										</div>
+										<div class="row services" style="    margin-top: 10px;">
+											<div class="container">
+												<div class="row justify-content-between">
+													<div class="col-3 name">выход</div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+												</div>
+											</div>
+										</div>
+										<div class="row services">
+											<div class="container">
+												<div class="row justify-content-between">
+													<div class="col-3 name">выход</div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+												</div>
+											</div>
+
+										</div>
+										<div class="row services">
+											<div class="container">
+												<div class="row justify-content-between">
+													<div class="col-3 name">выход</div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+												</div>
+											</div>
+										</div>
+										<div class="rels">
+											<span class="grey">Итого:</span> 5 выходов в день
+										</div>
+										<div class="cost">
+											Стоимость 1 дня: <span class="red-sale">3 000 ₽</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6 col-lg-1 socials">
+									<div class="col-sm-12 col-12 col-lg-1 col-md-12 social-media">
+										<img src="{{ url_for('static', filename='img/inst_grey.svg') }}" alt="" class="socials-grey">
+										<img src="{{ url_for('static', filename='img/vk_grey.svg') }}" alt="" class="socials-grey">
+										<img src="{{ url_for('static', filename='img/fb_grey.svg') }}" alt="" class="socials-grey">
+										<img src="{{ url_for('static', filename='img/mail_grey.svg') }}" alt="" class="socials-grey">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col" style="padding: 0;">
+						<div class="container footer-other" style="padding: 0;">
+							<div class="row d-none d-xl-flex d-lg-flex" style="padding: 0; min-height: 60px; margin-top: -17px;">
+								<div class="col col-md-12 col-xl header-menu">
+									<div class="container">
+										<div class="row justify-content-between">
+											<div class="menu-elem elem-one"><span class="one-f">Создать объявление</span></div>
+											<div class="menu-elem elem-two"><span class="two-f">Оплата</span></div>
+											<div class="menu-elem elem-three"><span class="three-f">Продление</span></div>
+											<div class="menu-elem elem-four"><span class="four-f">Редактирование</span></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-4 col-xl-4 col-md-5 header-contact-number">
+									<img src="{{ url_for('static', filename='img/header-logo.svg') }}" alt="" class="phone-icon">
+									<a href="tel:+78432030303" class="phone-number">( 843 ) 203 - 03 - 30</a>
+								</div>
+							</div>
+
+								<div class="container trash">
+									<div class="row align-items-end">
+										<div style="text-align: center;" class="col d-none d-xl-block rights grey">
+											© <span class="orange">ЭФИР</span> Все права защищены
+										</div>
+										<div class="col-12 col-xl col-md-12 last-offer">
+											Подайте телевизионные рекламные объявления
+											и поздравления, которые увидят более
+											<span class="white">130 тысяч зрителей на телеканале «Эфир»</span>
+											<br><br>
+											Разместить объявление самостоятельно очень легко, воспользуйтесь редактором объявлений
+											Он прост в использовании
+											<div class="container " style="padding: 0;">
+												<div class="row justify-content-start" style="padding: 0;">
+													<div class="col-10">
+														<button class="apply" data-toggle="modal" data-target="#mmmodality">Подать объявление</button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+										<div style="text-align: center;" class="col d-xl-none col-md-6 rights grey">
+											© <span class="orange">ЭФИР</span> Все права защищены
+										</div>
+									</div>
+								</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+        	<div class="modal fade" id="mmmodality" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header"  style="border: none" style="">
+	        <h5 class="modal-title" id="exampleModalLongTitle">Начало проекта</h5>
+
+	      </div>
+	      <div class="modal-body" style="border: none">
+	        <form action="" class="modalka" onsubmit="return validate();">
+	        	<div class="container" style="padding: 0;">
+	        		<div class="row">
+	        			<div class="col-2"><label for="name">Имя</label></div>
+	        			<div class="col"  id="name_err" style="padding: 0;">Введите корректное имя</div>
+	        		</div>
+	        	</div>
+
+	        	<input id="name" type="text" placeholder="Ваше имя"><br>
+
+	        	<div class="container" style="padding: 0;">
+	        		<div class="row" style=" height: 35px; ">
+	        			<div class="col-3"><label for="mulo">E-mail</label><br></div>
+	        			<div class="col"  id="email_err" style="padding: 0;">Введите корректный email</div>
+	        		</div>
+	        	</div>
+
+
+	        	<input type="text" id="mulo" placeholder="Ваша почта"><br>
+
+	        	<div class="container" style="padding: 0;">
+	        		<div class="row" style="height: 35px">
+	        			<div class="col-3"><label for="mobilka">Телефон</label><br><br></div>
+	        			<div class="col"  id="mobile_err" style="padding: 0;">Введите корректный телефон</div>
+	        		</div>
+	        	</div>
+
+
+	        	<input type="text" id="mobilka" placeholder="+7 ( ___ ) ___-__-__"><br>
+	        	<input name="messaga" id="mess" placeholder="Ваше сообщение"></input><br>
+					<div class="container " style="padding: 0;">
+						<div class="row justify-content-center" style="padding: 0;">
+							<div class="col-9">
+	        					<input class="syab" type="submit" value="Подать объявление">
+
+							</div>
+						</div>
+					</div>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+    	<script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+	    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+	    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	    <script src="{{ url_for('static', filename='js/jquery.maskedinput.js') }}"></script>
+	    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+        </body>
+</html>

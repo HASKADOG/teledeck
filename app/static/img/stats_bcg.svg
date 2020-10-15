@@ -1,0 +1,26 @@
+<svg width="1366" height="700" viewBox="0 0 1366 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1366" height="675" fill="white"/>
+<path d="M48 675C99.0853 602.505 247.85 454.295 406.633 561.943C565.416 669.591 724.199 616.184 770.929 541.081C817.66 465.978 956.983 127.895 1366 335.471" stroke="url(#paint0_linear)" stroke-width="5"/>
+<g opacity="0.04" filter="url(#filter0_f)">
+<path d="M121 675C169.256 609.826 309.78 476.583 459.769 573.36C609.758 670.137 759.746 622.123 803.888 554.605C848.031 487.086 979.637 183.144 1366 369.759" stroke="black" stroke-width="5"/>
+</g>
+<ellipse opacity="0.1" rx="25" ry="25" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 1366 335)" fill="#FAA61A"/>
+<ellipse opacity="0.2" rx="18" ry="18" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 1366 335)" fill="#FAA61A"/>
+<ellipse opacity="0.35" rx="11" ry="11" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 1366 335)" fill="#FAA61A"/>
+<ellipse rx="4.41176" ry="4.41177" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 1366 335)" fill="#FAA61A"/>
+<ellipse opacity="0.1" rx="25" ry="25" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 49 675)" fill="#FAA61A"/>
+<ellipse opacity="0.2" rx="18" ry="18" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 49 675)" fill="#FAA61A"/>
+<ellipse opacity="0.35" rx="11" ry="11" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 49 675)" fill="#FAA61A"/>
+<ellipse rx="4.41176" ry="4.41177" transform="matrix(1.31134e-07 -1 -1 -1.31134e-07 49 675)" fill="#FAA61A"/>
+<defs>
+<filter id="filter0_f" x="114.991" y="303.5" width="1256.1" height="376.988" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur"/>
+</filter>
+<linearGradient id="paint0_linear" x1="47.4975" y1="573.819" x2="1016.6" y2="676.538" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF9F00"/>
+<stop offset="1" stop-color="#FAA61A" stop-opacity="0.5"/>
+</linearGradient>
+</defs>
+</svg>

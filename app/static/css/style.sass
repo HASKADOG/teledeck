@@ -1,0 +1,1115 @@
+//IMPORTS
+@import 'fonts'
+@import 'animations'
+
+//BOOTSTRAP SETTINGS
+.container-xl
+	max-width: 1366px !important
+	.row
+		margin-right: 0
+	
+//GLOBAL
+
+.orange
+	color: #FAA61A !important
+.grey
+	color: #B4B4B4 !important
+.white
+	color: #fff !important
+//GLOBAL
+
+//MAIN 
+.header
+	height: 60px
+	background-color: #F4F4F4
+	.papka
+		padding: 0 50px 0 50px
+	.header-logo
+		margin-top: 7px
+	div
+		//outline: 1px black solid
+		font-family: 'mont-semibold'
+		font-size: 14px
+	.header-contact-number
+		padding-right: 20px
+		.phone-icon
+			margin-top: 5px
+		a
+			color: #404040 !important
+			line-height: 60px
+	.header-menu
+		height: 60px
+		.menu-elem
+			margin: 0
+			padding: 0
+			text-align: center
+			height: 60px
+			line-height: 60px
+			color: #787878
+			cursor: pointer
+			a
+				text-decoration: none !important
+				color: #787878
+
+		.elem-one
+			&:before
+				content: ''
+				border-radius: 28%
+				width: 20px
+				height: 3px
+				background-color: #F28B02
+				display: inline-block
+				position: absolute
+				top: -10px
+				left: 80px
+
+
+//HEADER
+.main
+	background-color: #f8f8f8
+	.slider-block
+		border-radius: 0 0 10px 0 
+		height: 708px
+		overflow: hidden
+		//max-width: 1052px
+		padding: 0
+		.slide-wrapper
+			.slide-heading-wrapper
+				padding-left: 30px
+			background-image: url("../img/bcg.png")
+			background-size: cover
+			width: 100%
+			height: 708px
+			.container
+				height: 100%
+				padding-bottom: 46px
+			.row
+				height: 100%
+			.heading	
+				font-family: "mont-heavy"
+				font-size: 48px
+				line-height: 106.7%
+				margin-bottom: 26px
+			.main-deal
+				font-family: 'mont-bold'
+				font-size: 24px
+				margin-bottom: 6px
+			.sale
+				font-family: 'mont-semibold'
+				font-size: 18px
+			.line-through
+				display: inline-block
+				&:before 
+					content: ''
+					width: 65px
+					height: 2px
+					background-color: #fff
+					display: inline-block
+					position: absolute
+					top: 13px
+					left: 97px
+			.red-sale
+				display: inline-block
+				background-color: red
+				width: 84px
+				height: 29px
+				text-align: center
+				border-radius: 20px
+				line-height: 169.7%
+				margin-left: 20px
+		.slide-heading
+			color: #fff
+		.owl-dots
+			outline: none !important
+			margin-top: -65px !important
+			position: relative !important
+			span
+				width: 7px
+				height: 7px
+				background-color: #fff
+				opacity: 20%
+		.owl-dot
+			outline: none !important
+		.owl-dots .active
+			span
+				border: 3px solid #FAA61A
+				width: 15px
+				height: 15px
+				transform: translate(0, 2px)
+				opacity: 100%
+				background: none !important
+		.background
+			width: 100%
+		//width: 100% 
+		background-color: #F8F8F8
+	.offers
+		//height: 708px !important
+		//width: 100%
+		background-color: #F8F8F8
+		padding: 15px 15px 0 15px
+		.container
+			padding-top: 15px
+			.comparison
+				.container
+					padding-right: 0
+				max-width: 254px
+				height: 400px
+				width: 100%
+				background-color: #FFFFFF
+				padding-left: 30px
+				padding-right: 30px
+				border-radius: 10px
+				box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04)
+				.heading
+					.bold
+						font-family: 'mont-semibold'
+						color: #282828
+						font-size: 14px
+						padding-top: 15px
+						line-height: 120.7%
+						padding-left: 0
+						padding-right: 0
+						&:before
+							content: ''
+							border-radius: 23%
+							width: 4px
+							height: 30px
+							background-color: #F28B02
+							display: inline-block
+							position: absolute
+							top: 17px
+							left: -32px
+					.light
+						font-family: 'mont-semibold'
+						color: #787878
+						font-size: 11px
+						padding-top: 5px
+						line-height: 130.7%
+						padding-bottom: 17px 
+						padding-left: 0
+						padding-right: 0
+				.services
+					border-top: 1px dashed #D8D8D8
+					&:nth-child(2)
+						border-top: 1px dashed #F28B02
+					.container
+						padding: 22px 0 19px 0
+						.row
+							width: 100%
+							margin-right: 0
+							margin-left: 0
+						.name
+							font-family: 'mont-semibold'
+							color: #787878
+							font-size: 11px
+							line-height: 5px
+							.service-name
+								padding-left: 7px
+								text-align: left
+							.service-mytarget
+								margin-left: -3px
+						.amount
+							font-family: 'mont-semibold'
+							font-size: 14px
+							.services-pointer
+								margin-right: 7px
+							.service-client
+								margin-right: 7px
+								margin-bottom: 3px
+							.users
+			.pusher
+				position: absolute
+				height: 218px
+				max-width: 405px !important
+				overflow: visible
+				transform: translate(-150px, 0)
+				z-index: 500
+				margin-top: 30px
+				padding-right: 0
+				.pusher-wrap
+					padding: 0
+					.social-media
+						margin-right: 10px
+					.main-offer
+						height: 218px
+						border-radius: 10px
+						background-image: url('../img/main_offer_bcg.png')
+						background-size: 100% 100%
+					.socials-grey
+						margin-top: 6px
+						margin-bottom: 6px
+						cursor: pointer
+					.try-us
+						height: 100%
+						color: #fff
+						padding-bottom: 30px
+						.row
+							height: 100%
+						.try-us-inner
+							font-family: 'mont-semibold'
+							font-size: 16px
+							line-height: 20px
+							padding-top: 15px
+							&:before
+								content: ''
+								border-radius: 23%
+								width: 4px
+								height: 30px
+								background-color: #F28B02
+								display: inline-block
+								position: absolute
+								top: 17px
+								left: -17px
+						.try-us-btn-row
+							text-align: right
+							.apply
+								cursor: pointer
+								background-color: #FAA61A
+								width: 213px
+								height: 50px
+								display: inline-block
+								line-height: 50px
+								text-align: center
+								border-radius: 25px
+								box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+								font-family: 'mont-bold'
+								font-size: 15px
+								border: none
+								color: white
+								outline: none !important
+
+
+//TARGETED
+.targeted
+	background-color: #F8F8F8
+	padding: 98px
+	.heading-wrap
+		.row
+			padding: 0 30px
+		padding: 0
+		.head
+			font-family: 'mont-heavy'
+			font-size: 36px
+			color: #282828
+			flex: 0 0 40.333333% !important
+			max-width: 40.333333% !important
+			line-height: 40px
+		.decoration-wrap
+			height: 100%
+			padding: 0
+			.decoration
+				.row
+					height: 50px
+				.elipse
+					flex: 0 0 10.333333%
+					max-width: 10.333333%
+				.line-wrap
+					height: 2px
+					padding-right: 0px
+					.line
+						background-color: #E0E0E0
+						height: 1px
+						width: 100%
+	.targeted-main
+		.row
+			.targets
+				max-height: 540px !important
+				max-width: 525px
+				margin: 30px 10px 0 10px
+				margin-top: 30px
+				padding: 50px 50px 40px 50px
+				.container-tile
+					max-width: 525px
+					&:before 
+						content: ''
+						max-width: 525px
+						width: 100%
+						height: 70%
+						background-color: #fff
+						display: inline-block
+						position: absolute
+						left: 0
+						border-radius: 10px
+						bottom: 0px
+					.image
+						padding-left: 20px
+						padding-right: 20px
+						img
+							width: 100%
+					.head
+						font-family: 'mont-bold'
+						font-size: 24px
+						color: #282828
+						text-align: left
+						margin-top: 35px
+						padding-left: 5px
+						&:before
+							content: ""
+							border-radius: 23%
+							width: 4px
+							height: 30px
+							background-color: #F28B02
+							display: inline-block
+							position: absolute
+							top: 6px
+							left: -37px
+					.text
+						font-family: 'mont-semibold'
+						font-size: 14px
+						color: #787878
+						margin-top: 10px
+						line-height: 25px
+						padding-left: 5px
+
+
+//STATS
+.stats
+	padding-top: 100px
+	.stats-wrap
+		.grey-block
+			overflow: visible
+			color: #F8F8F8
+			background: #F8F8F8
+			width: 100%
+			left: 0
+			z-index: -10
+			height: 25px
+			position: absolute
+			transform: translate(0, -21px)
+		max-width: 1366px
+		padding: 0 67px 0 67px
+		background-image: url('../img/stats_bcg.svg')
+		
+		background-size: 100% 100%
+		.desc-wrap
+			.desc
+				.row
+					.logo
+						opacity: 20%
+					.text
+						font-family: 'mont-heavy'
+						font-size: 36px
+						line-height: 40px
+						margin-top: 80px
+
+		.plotter
+			padding-right: 0
+			img
+				width: 100%
+		.order
+			margin-top: 73px
+			.row
+				.col-3
+					flex: 0 0 25%
+					max-width: 23%
+				.apply
+					cursor: pointer
+					background-color: #FAA61A
+					width: 213px
+					height: 50px
+					display: inline-block
+					line-height: 50px
+					text-align: center
+					border-radius: 25px
+					box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+					font-family: 'mont-bold'
+					font-size: 15px
+					color: white
+					border: none
+					outline: none !important
+					
+
+//BLOCKS
+.blocks
+	padding-top: 100px
+	padding-bottom: 100px
+	background-color: #F8F8F8
+	.blocks-wrap
+		.row
+			.top-block
+				.video
+					padding: 0
+					margin: 0
+					height: 240px
+					width: 100%
+					min-height: 295px
+					.a-one
+						background-image: url('../img/video_1.png')
+					.a-two
+						background-image: url('../img/video-2.png')
+					a
+						width: 100%
+						height: 100%
+						border-radius: 10px 10px 0 0
+						&:hover
+							.play
+								background-image: url('../img/play-active.svg')
+								background-repeat: no-repeat
+
+						.play
+							width: 118px
+							height: 118px
+							background-image: url('../img/play-orange.svg')
+							background-repeat: no-repeat
+
+				.tile
+					max-width: 570px
+					background: #fff
+					padding-left: 0
+					padding-right: 0
+					border-radius: 10px
+					background-image: url("../img/blocks-elipses.png")
+					background-position: right bottom
+					background-repeat: no-repeat
+					.text
+						font-family: 'mont-bold'
+						font-size: 24px
+						display: inline-block
+						margin-top: 32px
+						padding-left: 60px
+						height: 70px
+						&:before
+							content: ""
+							border-radius: 23%
+							width: 4px
+							height: 30px
+							background-color: #F28B02
+							display: inline-block
+							position: absolute
+							top: 7px
+							left: -2px
+				
+				.second
+					padding-bottom: 36px
+				
+		.bottom-block
+			margin-top: 30px
+			.row
+				//Spadding-left: 15px
+			.offer
+				width: 50%
+				padding-right: 0
+				background: #fff
+				&:after
+					content: ""
+					border-radius: 0
+					width: 98px
+					height: 100%
+					background-image: url("../img/waves.svg")
+					display: inline-block
+					position: absolute
+					top: 0px
+					right: 0px
+				.offer-wrap
+					height: 100%
+					padding-bottom: 25px
+					padding-top: 25px
+					
+					.row
+						height: 100%
+					.head
+						font-family: "mont-bold"
+						font-size: 36px
+						color: #282828
+					.neck
+						font-family: "mont-bold"
+						font-size: 24px
+						color: #282828
+						.red-sale
+							display: inline-block
+							background-color: red
+							width: 84px
+							height: 29px
+							text-align: center
+							border-radius: 20px
+							line-height: 169.7%
+							margin-left: 20px
+							color: #fff
+							font-size: 18px
+					.legs
+						font-family: "mont-bold"
+						font-size: 24px
+						color: #282828
+					.body
+						font-family: "mont-semibold"
+						font-size: 16px
+						color: #282828
+			.think
+				width: 50%
+				padding-left: 0
+				padding-right: 0
+				img
+					width: 100%
+
+
+//FOOTER
+.footer
+	background-color: #080808
+	padding: 0
+	margin: 0
+	.back
+		padding: 80px 0 80px 0
+		width: 100%
+		height: 100%
+		background-image: url("../img/footer_elipses.svg")
+		background-position: center center
+		background-repeat: no-repeat
+		.footer-wrap
+			height: 100%
+			.moot
+				font-family: 'mont-semibold'
+				font-size: 14px
+				.header-menu
+					height: 60px
+					.menu-elem
+						margin: 0
+						padding: 0
+						text-align: center
+						height: 60px
+						line-height: 60px
+						color: #B4B4B4
+						cursor: pointer
+					.elem-one
+						&:before
+							content: ''
+							border-radius: 28%
+							width: 20px
+							height: 3px
+							opacity: 0
+							background-color: #F28B02
+							display: inline-block
+							position: absolute
+							top: 0
+							left: 94px
+			.foot
+				height: 100%
+				padding-left: 15px
+				.schedule
+					.comparison
+						height: 328px
+						min-width: 287px
+						max-width: 287px
+						margin: auto
+						background-color: #1A1A1A
+						padding: 0 0 10px 0
+						border-radius: 10px
+						box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04)
+						.heading
+							min-height: 94px
+							padding-left: 30px
+							padding-right: 30px
+							background-color: #232323
+							border-radius: 10px 10px 0 0
+							padding-top: 11px
+							.bold
+								font-family: 'mont-bold'
+								color: #fff
+								font-size: 16px
+								padding-top: 15px
+								line-height: 120.7%
+								padding-left: 0
+								padding-right: 0
+								
+							.light
+								font-family: 'mont-semibold'
+								color: #B4B4B4
+								font-size: 14px
+								padding-top: 5px
+								line-height: 130.7%
+								padding-bottom: 17px 
+								padding-left: 0
+								padding-right: 0
+						.services
+							padding-right: 30px
+							padding-left: 30px
+							.container
+								border-bottom: 1px solid #272727
+								padding: 11px 0 9px 0
+								.row
+									width: 100%
+									margin-right: 0
+									margin-left: 0
+									padding-left: 0
+								.name
+									padding: 0
+									font-family: 'mont-semibold'
+									color: #fff
+									font-size: 14px
+									line-height: 18px
+									.service-name
+										padding-left: 7px
+										text-align: left
+									.service-mytarget
+										margin-left: -3px
+								.amount
+									padding: 0
+									color: #fff
+									font-family: 'mont-semibold'
+									font-size: 14px
+									text-align: right
+									.services-pointer
+										margin-right: 7px
+									.service-client
+										margin-right: 7px
+										margin-bottom: 3px
+									.users
+						.rels
+							font-family: "mont-semibold"
+							font-size: 14px
+							color: #fff
+							margin-top: 24px
+							padding-left: 15px
+						.cost
+							font-family: "mont-semibold"
+							font-size: 14px
+							color: #b4b4b4
+							padding-left: 15px
+							.red-sale
+								display: inline-block
+								background-color: red
+								width: 84px
+								height: 29px
+								text-align: center
+								border-radius: 20px
+								line-height: 183.7%
+								margin-left: 20px
+								color: white
+								font-size: 16px
+					.socials
+						padding: 0
+					.social-media
+						margin-right: 10px
+						bottom: 0
+					.socials-grey
+						margin-top: 6px
+						margin-bottom: 6px
+						cursor: pointer
+						opacity: 60%
+
+	.footer-other
+		font-family: "mont-semibold"
+		font-size: 14px
+		min-height: 328px
+		.header-menu
+			height: 60px
+			.menu-elem
+				margin: 0
+				padding: 0
+				text-align: center
+				height: 60px
+				line-height: 60px
+				color: #B4B4B4
+				cursor: pointer
+			.elem-one
+				text-decoration: none !important
+				&:before
+					content: ''
+					border-radius: 28%
+					width: 20px
+					height: 3px
+					opacity: 0
+					background-color: #F28B02
+					display: inline-block
+					position: absolute
+					top: 0
+					left: 94px
+		.header-contact-number
+			text-align: center
+			img
+				margin-top: 5px
+			a
+				font-size: 14px
+				color: #fff
+				line-height: 60px
+		.trash
+			.last-offer
+				color: #B4B4B4
+				line-height: 20px
+				font-size: 14px
+			.apply
+				cursor: pointer
+				background-color: #FAA61A
+				width: 213px
+				height: 50px
+				display: inline-block
+				line-height: 50px
+				text-align: center
+				border-radius: 25px
+				box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+				font-family: 'mont-bold'
+				font-size: 15px			
+				margin-right: auto
+				margin-left: auto
+				color: #fff
+				margin-top: 25px
+				border: none
+				outline: none !important
+.fade
+	.modal-dialog
+		.modal-content
+			&:before
+				content: ''
+				border-radius: 28%
+				width: 30px
+				height: 4px
+				background-color: #F28B02
+				display: inline-block
+				position: absolute
+				top: -2px
+				left: 46%
+			width: 403px
+			border-radius: 20px
+			margin: auto
+			.modal-header
+				padding: 50px 0 0 50px
+			.modal-title
+				font-family: "mont-bold"
+				font-size: 24px
+				color: #282828
+			.modal-body
+				padding: 0 50px 50px 50px
+				#name_err
+					display: inline-block
+					text-align: right
+					font-family: "mont-regular"
+					font-size: 10px
+					margin-top: 15px
+					padding-right: 15px !important
+					color: white
+				#email_err
+					display: inline-block
+					text-align: right
+					font-family: "mont-regular"
+					font-size: 10px
+					margin-top: 15px	
+					padding-right: 15px !important
+					color: white
+
+				#mobile_err
+					display: inline-block
+					text-align: right
+					font-family: "mont-regular"
+					font-size: 10px
+					margin-top: 15px	
+					padding-right: 15px !important	
+					color: white
+
+
+				label
+					font-family: "mont-semibold"
+					font-size: 13px
+					color: #282828
+					margin: 25px 0 0 0
+					&:nth-child(1)
+						margin-top: 15px
+				input
+					width: 100%
+					font-family: "mont-semibold"
+					font-size: 16px
+					color: #787878
+					height: 35px
+					border: none
+					border-bottom: 1px dashed red
+					outline: none
+					&:-internal-autofill-selected
+						background-color: white !important
+				input#mess
+					height: 70px
+					margin-top: 15px
+				.syab
+					cursor: pointer
+					background-color: #FAA61A
+					width: 213px
+					height: 50px
+					display: inline-block
+					line-height: 50px
+					text-align: center
+					border-radius: 25px
+					box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+					font-family: 'mont-bold'
+					font-size: 15px			
+					margin-right: auto
+					margin-left: auto
+					color: #fff
+					margin-top: 45px
+					border: none
+					outline: none !important
+					transition: 0.3s
+					&:hover
+						background-color: #DF910F !important
+
+
+.login_reg
+	padding: 50px 0
+	font-family: "mont-semibold"
+	min-height: 900px
+
+.login_reg_form
+	input
+		width: 100%
+		font-family: "mont-semibold"
+		font-size: 16px
+		color: #787878
+		height: 35px
+		border: none
+		border-bottom: 1px dashed red
+		outline: none
+	select
+		width: 100%
+		height: 30px
+
+
+
+@import 'adapt'
+.header-ham
+	display: none
+.menuphka
+	display: none
+
+.annonymous
+	font-family: 'annonymous' !important
+
+.annonymous-bold
+	font-family: 'annonymous-bold' !important
+
+.annonymous-italic
+	font-family: 'annonymous-italic' !important
+
+.arimo
+	font-family: 'arimo' !important
+
+.arimo-bold
+	font-family: 'arimo-bold' !important
+
+.arimo-italic
+	font-family: 'arimo-italic' !important
+
+.cousine
+	font-family: 'cousine' !important
+
+.cousine-bold
+	font-family: 'cousine-bold' !important
+
+.cousine-italic
+	font-family: 'cousine-italic' !important
+
+.cuprum
+	font-family: 'cuprum' !important
+
+.cuprum-bold
+	font-family: 'cuprum-bold' !important
+
+.cuprum-italic
+	font-family: 'cuprum-italic' !important
+
+.opensans
+	font-family: 'opensans' !important
+
+.opensans-bold
+	font-family: 'opensans-bold' !important
+
+.opensans-italic
+	font-family: 'opensans-italic' !important
+
+.philosopher
+	font-family: 'philosopher' !important
+
+.philosopher-bold
+	font-family: 'philosopher-bold' !important
+
+.philosopher-italic
+	font-family: 'philosopher-italic' !important
+
+.font-hider
+	display: none !important
+
+#moderate
+	background: #F28B02
+	padding: 10px 15px
+	border: none
+	border-radius: 15px
+	color: white
+	margin-top: 10px
+
+.image_form
+	input
+		margin-top: 10px
+		margin-bottom: 10px
+
+	select
+		background: #f28b02
+		height: 40px
+		outline: none
+		border-radius: 15px
+		border: none
+		color: white
+#image_in_lb
+	background: red
+	width: 100%
+	height: 40px
+	line-height: 40px
+	color: white
+	padding-left: 5px
+	border-radius: 15px
+	margin-top: 10px
+	cursor: pointer
+
+#image_uniq_lb
+	background: red
+	width: 100%
+	height: 40px
+	line-height: 40px
+	color: white
+	padding-left: 5px
+	border-radius: 15px
+	margin-top: 10px
+	cursor: pointer
+
+.ads
+	line-height: 40px
+	border-radius: 25px
+	background: #faa61a
+	color: white
+	font-family: 'mont-semibold'
+	padding: 3px 10px 10px 10px
+	.ad
+		.image_body
+			img
+				width: 100%
+		.bread_crumbs
+			text-align: center
+		hr
+			border-top: white 1px solid
+			margin: 0 0 10px 0
+		.actions_ads
+			.get_add
+				background: white !important
+				color: #faa61a
+				width: 100%
+				margin-top: 10px !important
+#get_ad
+	margin-top: 20px
+	cursor: pointer
+	background-color: #FAA61A
+	width: 213px
+	height: 50px
+	display: inline-block
+	line-height: 50px
+	text-align: center
+	border-radius: 25px
+	box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+	font-family: 'mont-bold'
+	font-size: 15px
+	border: none
+	color: white
+	outline: none !important
+
+.get_add
+	margin-top: 20px
+	cursor: pointer
+	background-color: #FAA61A
+	width: 213px
+	height: 50px
+	display: inline-block
+	line-height: 50px
+	text-align: center
+	border-radius: 25px
+	box-shadow: 0px 26px 18px -20px rgba(250,166,26,1)
+	font-family: 'mont-bold'
+	font-size: 15px
+	border: none
+	color: white
+	outline: none !important
+
+.yandex-money-payment-form
+	padding: 50px 10px !important
+
+.calendar
+	border-radius: 25px 0 0 25px
+	background: #f28b02
+	.container
+		padding: 5px 5px
+	.month_shifter
+		text-align: center
+		color: white
+		height: 40px
+		line-height: 40px
+		.left
+			cursor: pointer
+		.right
+			cursor: pointer
+	.day_wrap
+		width: 14.28571% !important
+		height: 20%
+		margin: 2px 0
+		.day
+			line-height: 50px
+			width: 50px
+			height: 50px
+			color: white
+			text-align: center
+			border-radius: 25px
+			background: #1f2227
+			cursor: pointer
+			-webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+			-moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+			box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+
+
+.info_wrap
+	border-radius: 0 29px 25px 0
+	height: 320px
+	background: #f28b02
+	padding: 0
+	.info
+		overflow-y: auto
+		height: 66.4%
+		.added_day
+			background: #1f2227
+			border-radius: 10px
+			padding: 2px 8px
+			color: white
+			margin: 8px 0
+			width: 97%
+			-webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+			-moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+			box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+	.chosen_days
+		color: white
+		text-align-last: center
+		height: 50px
+		line-height: 50px
+		font-size: 17px
+		background: #1f2227
+		border-radius: 0 0 0 25px
+	.clear
+		color: white
+		text-align-last: center
+		height: 50px
+		line-height: 50px
+		font-size: 17px
+		background: #1f2227
+		border-radius: 0 25px 0 0
+		cursor: pointer
+		&:hover
+			background: red
+
+	.price
+		height: 18%
+		background: #1f2227
+		border-radius: 25px 0 25px 0
+		font-size: 20px
+		color: white
+		line-height: 56px
+		text-align: center
+
+#activate_promo
+	background: #faa61a
+	height: 40px
+	border: none
+	border-radius: 15px
+	width: 100%
+	color: white
+	-webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+	-moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+	box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)

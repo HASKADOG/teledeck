@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lk-wrap login_reg">
+    <div class="container">
+        <div class="row">
+            <div class="col-5 login_reg_form">
+                <p style="font-family: 'mont-bold'">
+                    <label for="username">Введите трек код:</label>
+                    <input type="text" id="track_code" value="{{ user.username }}">
+                    <button id="get_ad" class="get_add">Поиск</button>
+                </p>
+                <div class="place">
+
+
+                </div>
+            </div>
+         </div>
+    </div>
+</div>
+{% endblock %}
