@@ -121,12 +121,7 @@ def add_add():
                       second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
                       notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
                       template_data=json.dumps(template_data), status=1)
-        for ime in time[:-1].split(','):
-            print(ime)
-            time_to_taken = Time.query.filter_by(date=datetime.datetime.strptime(ime, '%d_%m_%Y')).first()
-            time_to_taken.taken = True
-            db.session.add(time_to_taken)
-            db.session.commit()
+
         db.session.add(new_ads)
         db.session.commit()
         # db.session.add(time_to)
@@ -246,6 +241,12 @@ def edit(track_code):
     print(ad.price)
     return render_template('edit.html', ad=ad, days=added_days)
 
+@app.route('/approve_payment', methods=['POST', 'GET'])
+def approve():
+    if request.method == 'POST':
+        c = request
+        a=1
+        b=2
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():

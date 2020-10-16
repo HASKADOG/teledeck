@@ -32,25 +32,27 @@ class Calendar():
         ]
 
     def get_calendar(self, month_n, year, promo=None):
+
+        print(year)
+
+        if month_n == 0:
+            year_q = year - 1
+            month_n = 12
+        else:
+            year_q = year
+
         month_n = int(month_n) - 1
         now = self.today
-        print(month_n)
         out = {
             'month': self.months[0 if month_n == 12 else month_n]['name'],
             'month_n': month_n + 1,
-            'year': year,
+            'year': year_q,
             'days': []
         }
         sale = 0
         try:
-            print('current_m {}'.format(1 if month_n + 1 == 13 else month_n + 1))
 
-            if month_n == 0:
-                year_q = year - 1
-                month_n = 12
-            else:
-                year_q = year
-
+            print('|{}|{}'.format(month_n+1, year_q))
             month_db = Time.query.filter(extract('month', Time.date) == (1 if month_n + 1 == 13 else month_n + 1), extract('year', Time.date) == (year_q))
 
             for date in month_db:
@@ -84,7 +86,7 @@ class Calendar():
 
         try:
             print('next_m {}'.format(1 if month_n + 2 == 13 else month_n + 2))
-            month_next = Time.query.filter(extract('month', Time.date) == (1 if month_n + 2 == 13 else month_n + 2), extract('year', Time.date) == (year))
+            month_next = Time.query.filter(extract('month', Time.date) == (1 if month_n + 2 == 13 else month_n + 2), extract('year', Time.date) == (year_q))
 
             for i in range(0, 36 - self.months[0 if month_n == 12 else month_n]['days_qty']):
                 out['days'].append(
