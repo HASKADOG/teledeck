@@ -38,7 +38,11 @@
 
                 <p>
                     <label for="is_entity">Организация?</label><br>
-                    <input type="checkbox" style="width: 40px" id="is_entity">
+                    <input type="checkbox" style="width: 40px" id="is_entity"
+                    {% if ad.is_entity %}
+                               checked
+                           {% endif %}
+                    >
                 </p>
                 <div id="personal_block">
                     <p>
@@ -82,20 +86,13 @@
                 <div class="container promo_wrap"  style="padding-left: 0">
                     <div class="row" style="padding: 0">
                         <div class="col-7">
-                            <input type="text" id="promo" placeholder="Промокод">
+                            <input type="text" id="promo" placeholder="Промокод" value="{{ ad.promocode}}">
                         </div>
                         <div class="col-5"  style="padding: 0">
                             <button id="activate_promo">Активировать</button>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
                 </div>
                 <div class="col-7"></div>
                                     <div class="container">
@@ -259,7 +256,7 @@
                     <label id="image_in_lb" for="image_in">Загрузить файл (1680*570)</label>
 <input type="file" style="border: none; margin-top: 10px" hidden onChange="merge()" data-buttonText="Загрузить картинку" id="image_in"><br>
 
-<input type="text" id="head" onchange="onfil(document.getElementById('image'))" placeholder="Заголовок">
+<input type="text" id="head" onchange="onfil(document.getElementById('image'))" placeholder="Заголовок" value="{{ template_data['head'] }}">
 <select id="head-weight" onChange="change_weight(); draw_text()">
   <option value="" class="head-regular" selected>Обычный</option>
   <option value="-bold" class="head-bold">Жирный</option>
@@ -273,14 +270,14 @@
   <option value="-italic" class="text_in_red-italic">Курсив</option>
 </select>
 <br id="red_br" class="font-hider">
-<input type="text" id="body" onchange="onfil(document.getElementById('image'))" placeholder="Текст">
+<input type="text" id="body" onchange="onfil(document.getElementById('image'))" placeholder="Текст"  value="{{ template_data['body'] }}">
 <select id="body-weight" onChange="change_weight(); draw_text()">
   <option value="" class="body-regular" selected>Обычный</option>
   <option value="-bold" class="body-bold">Жирный</option>
   <option value="-italic" class="body-italic">Курсив</option>
 </select>
 <br>
-<input type="text" id="legs" onchange="onfil(document.getElementById('image'))" placeholder="Текст 2">
+<input type="text" id="legs" onchange="onfil(document.getElementById('image'))" placeholder="Текст 2"  value="{{ template_data['legs'] }}">
 <select id="legs-weight" onChange="change_weight(); draw_text()">
   <option value="" class="legs-regular" selected>Обычный</option>
   <option value="-bold" class="legs-bold">Жирный</option>

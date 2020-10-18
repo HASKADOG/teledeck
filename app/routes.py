@@ -65,31 +65,54 @@ def login():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     form = RegistrationForm()
-
+    try:
+        if request.args['ref_code']:
+            ref_code = request.args['ref_code']
+        else:
+            ref_code = ''
+    except:
+        ref_code = ''
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     print('bbbb')
     if form.validate_on_submit() and form.submit.data:
         print('aaaaa')
+        if form.ref_code.data != '':
+            ref_master = Users.query.filter_by(ref_code=form.ref_code.data).first()
+            if ref_master:
+                ref_master_id = ref_master.id
+            else:
+                ref_master_id = None
+        else:
+            ref_master_id = None
+
         user = Users(username=form.login.data, second_name=form.second_name.data, third_name=form.third_name.data,
                      password_hash=form.password.data, email=form.email.data, phone_number=form.phone_number.data,
                      is_entity=form.is_entity.data, entity_name=form.entity_name.data, iin=form.iin.data,
-                     ogrn=form.ogrn.data, ref_master_code=form.ref_code.data, register_date=datetime.datetime.now(),
-                     status='user')
+                     ogrn=form.ogrn.data, ref_master_code=form.ref_code.data, ref_master=ref_master_id, register_date=datetime.datetime.now(),
+                     status='user', ref_code=token_hex(3))
 
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         print('done')
-    return render_template('registration.html', title='Registration', form=form)
+    return render_template('registration.html', title='Registration', form=form, ref_code=ref_code)
 
 
 @app.route('/add_add', methods=['GET', 'POST'])
 def add_add():
     print('1')
 
-    # times = Time.query.filter_by(taken=False).all()
+    if current_user.is_authenticated:
+        user = Users.query.get(current_user.id)
+        if user.ref_master:
+            master = Users.query.get(user.ref_master)
+            discount = Variables.query.get(2).value #REFFERAL_D
+            reffered = True
 
+
+
+    # times = Time.query.filter_by(taken=False).all()
     if request.method == 'POST' and request.form['moderate'] == 'true':
         print('ad_add')
         data = request.form
@@ -106,6 +129,10 @@ def add_add():
         ogrn = None if data['ogrn'] == '' else data['ogrn']
         promo = data['promo']
         price = int(data['price'])
+        if reffered:
+            masters_s = int(price * (1 - (100-int(discount))/100))
+            print(masters_s)
+
         template_data = {
             "head": data['head'],
             "body": data['body'],
@@ -117,17 +144,25 @@ def add_add():
             fh.write(base64.decodebytes(bytes(img, 'utf-8')))
         print(img)
         a = 2
-        new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name, username=username,
-                      second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
-                      notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
-                      template_data=json.dumps(template_data), status=1)
+        if user:
+            new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name,
+                          username=username,
+                          second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
+                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
+                          template_data=json.dumps(template_data), status=1, user=user, masters_money= masters_s if reffered else None)
+        else:
+            new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name,
+                          username=username,
+                          second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
+                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
+                          template_data=json.dumps(template_data), status=1,  masters_money= masters_s if reffered else None)
 
         db.session.add(new_ads)
         db.session.commit()
         # db.session.add(time_to)
         db.session.commit()
         return jsonify({'response': 'Отправлено на модерацию. Трек-код: {}'.format(track_code)})
-    return render_template('test.html')
+    return render_template('test.html', current_user=current_user)
 
 
 @app.route('/lk', methods=['GET', 'POST'])
@@ -226,27 +261,61 @@ def do_payment(track_code):
 
     kassa = {
         'track': ad.track,
-        'price': 1323
+        'price': ad.price
     }
-
+    ad.paid = True
+    db.session.add(ad)
+    db.session.commit()
     return render_template('do_payment.html', pay_form=kassa)
 
 
 @app.route('/edit/<track_code>', methods=['POST', 'GET'])
 def edit(track_code):
     ad = Ads.query.filter_by(track=track_code).first()
+
     added_days = []
     for ime in ad.time[:-1].split(','):
         added_days.append([ime.replace('_', '.'), '{}_picked'.format(ime)])
     print(ad.price)
-    return render_template('edit.html', ad=ad, days=added_days)
+    template_data = json.loads(ad.template_data)
+    print(template_data)
+
+    if request.method == 'POST' and request.form['moderate'] == 'true':
+        data = request.form
+        ad.username = None if data['username'] == 'None' else data['username']
+        ad.second_name = None if data['second_name'] == 'None' else data['second_name']
+        ad.third_name = None if data['third_name'] == 'None' else data['third_name']
+        ad.individual_phone_number = data['phone_number']
+        ad.notify_email = data['notify_email']
+        ad.is_entity = False if data['is_entity'] == '0' else True
+        ad.time = data['time']
+        ad.entity_name = data['entity_name']
+        ad.iin = None if data['iin'] == '' else data['iin']
+        ad.ogrn = None if data['ogrn'] == '' else data['ogrn']
+        ad.promoсode = data['promo']
+        ad.price = int(data['price'])
+        ad.template_data = json.dumps({
+            "head": data['head'],
+            "body": data['body'],
+            "legs": data['legs']
+        })
+        ad.edited = True
+
+        db.session.add(ad)
+        db.session.commit()
+
+        return jsonify({'response': 'Изменено и отправено на модерацию'})
+
+    return render_template('edit.html', ad=ad, days=added_days, template_data=template_data)
+
 
 @app.route('/approve_payment', methods=['POST', 'GET'])
 def approve():
     if request.method == 'POST':
         c = request
-        a=1
-        b=2
+        a = 1
+        b = 2
+
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():

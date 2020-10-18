@@ -57,12 +57,17 @@ function validate() {
 }
 
 $(document).ready(function () {
-    var is_entity = document.getElementById("is_entity")
-    var entity_name = document.getElementById("entity_name")
+    var is_entity = document.getElementById("is_entity");
+    var entity = document.getElementById("entity_block");
+    var personal = document.getElementById("personal_block");
 
     if (is_entity.checked) {
-        alert('test')
-        entity_name.style.display = "none";
+        entity.style.display = "";
+        personal.style.display = "none";
+    }
+    else {
+        entity.style.display = "none";
+        personal.style.display = "";
     }
 });
 
@@ -71,7 +76,6 @@ jQuery(document).ready(function () {
     var entity = document.getElementById("entity_block");
     var personal = document.getElementById("personal_block");
 
-    entity.style.display = "none";
 
     jQuery('#is_entity').change(function () {
 
@@ -107,8 +111,7 @@ $(document).ready(function () {
                 is_entity: $('#is_entity').val(),
                 entity_name: $('#entity_name').val(),
                 iin: $('#iin').val(),
-                ogrn: $('#ogrn').val(),
-                ref_code: $('#ref_code').val()
+                ogrn: $('#ogrn').val()
             },
             type: 'POST',
             url: '/lk'
@@ -122,11 +125,9 @@ $(document).ready(function () {
 let clicked_elems = [];
 $(document).ready(function () {
 
-    alert($('#track_code').val() != "none");
 
     if ($('#track_code').val() != "none") {
         let added_days = document.getElementsByClassName('added_day');
-        alert('34');
         $.each(added_days, function (index, value) {
             clicked_elems.push(value.getAttribute('data-date').replace(/\./g, "_"));
         });
@@ -134,7 +135,6 @@ $(document).ready(function () {
     }
 
     $('#moderate').click(function () {
-        alert('начало отправки');
         var canvas = document.getElementById('img');
         var dataurl = canvas.toDataURL();
 
@@ -205,12 +205,10 @@ $(document).ready(function () {
             alert(ph + "ph");
         }
 
-        alert('стартуем');
         //alert(done);
         //alert(done_o);
         //alert(ph);
         if ((done == 1 || done_o == 1) && ph == 1 && soup == 1) {
-            alert('228');
             let checked_days = '';
             $.each(clicked_elems, function (index, value) {
                 checked_days += value + ',';
@@ -251,7 +249,6 @@ $(document).ready(function () {
 
 
     $('#get_ad').click(function () {
-        alert('начало отправки');
 
         $.ajax({
             data: {
@@ -275,9 +272,7 @@ $(document).ready(function () {
     function organise(response) {
         let i = 0;
         month_n = response.month_n;
-        alert(month_n);
         year = response.year;
-        alert(year);
         $('.month').html(response.month);
         $.each(response.days, function (index, value) {
             let id = parseInt(index) + 1;
@@ -474,5 +469,117 @@ $(document).ready(function () {
             .done(function (data) {
                 organise(data.response)
             });
+    });
+
+    $('#edit').click(function () {
+        var canvas = document.getElementById('img');
+        var dataurl = canvas.toDataURL();
+
+        if ($('#notify_email').val() == '') {
+            alert('Введите email');
+        } else {
+            var soup = 1;
+            //alert(soup + "soup");
+        }
+
+        if ($('#is_entity:checked').val() == 'on') {
+            if ($('#entity_name').val() == '') {
+                alert('Введите название организации');
+            } else {
+                var uno = 1;
+                //alert(uno + "uno");
+            }
+            if ($('#iin').val() == '') {
+                alert('Введите ИИН');
+            } else {
+                var dos = 1;
+                //alert(dos + "dos");
+            }
+            if ($('#ogrn').val() == '') {
+                //alert('Введите ОГРН');
+            } else {
+                var tres = 1;
+                //alert(tres + "tres");
+            }
+            if (uno == 1 && dos == 1 && tres == 1) {
+                var done = 1;
+                //alert(done + "done");
+            }
+        }
+
+        if ($('#is_entity:checked').val() == undefined) {
+            if ($('#username').val() == '') {
+                alert('Введите имя');
+            } else {
+                var an = 1;
+                //alert(an + "an");
+            }
+            if ($('#second_name').val() == '') {
+                //alert('Введите фамилию');
+            } else {
+                var tsvai = 1;
+                //alert(tsvai + "tsvai");
+            }
+            if ($('#third_name').val() == '') {
+                alert('Введите оттечство');
+            } else {
+                var dry = 1;
+                //alert(dry + "dry");
+            }
+            if (an == 1 && tsvai == 1 && dry == 1) {
+                var done_o = 1;
+                //alert(done_o + "done_o");
+            }
+            var is_ent = 0;
+        } else {
+            var is_ent = 1;
+        }
+
+        if ($('#phone_number').val() == '') {
+            alert('Введите номер телефона');
+        } else {
+            var ph = 1;
+            alert(ph + "ph");
+        }
+
+        //alert(done);
+        //alert(done_o);
+        //alert(ph);
+        if ((done == 1 || done_o == 1) && ph == 1 && soup == 1) {
+            let checked_days = '';
+            $.each(clicked_elems, function (index, value) {
+                checked_days += value + ',';
+                alert(checked_days);
+            });
+            $.ajax({
+                data: {
+                    moderate: 'true',
+                    username: $('#username').val(),
+                    second_name: $('#second_name').val(),
+                    third_name: $('#third_name').val(),
+                    phone_number: $('#phone_number').val(),
+                    notify_email: $('#notify_email').val(),
+                    is_entity: is_ent,
+                    entity_name: $('#entity_name').val(),
+                    iin: $('#iin').val(),
+                    ogrn: $('#ogrn').val(),
+                    time: checked_days,
+                    head: $('#head').val(),
+
+                    body: $('#body').val(),
+                    legs: $('#legs').val(),
+                    promo: $('#promo').val(),
+                    price: $('#price_input').attr('value'),
+                    image: dataurl
+                },
+                type: 'POST',
+                url: '/edit/' + $('#track_code').val()
+            })
+                .done(function (data) {
+                    alert(data.response);
+                });
+        }
+
+
     });
 });

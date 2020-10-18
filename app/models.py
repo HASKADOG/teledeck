@@ -29,8 +29,9 @@ class Users(UserMixin, db.Model):
     ref_code = db.Column(db.String(16), unique=True)
     ref_master_code = db.Column(db.String(16))
     register_date = db.Column(db.DateTime)
+    collected_m = db.Column(db.Integer)
     ads = db.relationship('Ads', backref='user', lazy='dynamic')
-    referrals = db.Column(db.Integer)
+    ref_master = db.Column(db.Integer)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -54,7 +55,7 @@ class Ads(db.Model):
     username = db.Column(db.String(64))
     second_name = db.Column(db.String(64))
     third_name = db.Column(db.String(64))
-    individual_phone_number = db.Column(db.Integer)
+    individual_phone_number = db.Column(db.BigInteger)
     promocode = db.Column(db.String(16))
     duration = db.Column(db.Integer)
     ad_type = db.Column(db.String(20))
@@ -66,6 +67,7 @@ class Ads(db.Model):
     author = db.Column(db.String(64))
     apply_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    masters_money = db.Column(db.Integer)
     new = db.Column(db.Boolean)
     edited = db.Column(db.Boolean)
     paid = db.Column(db.Boolean)

@@ -34,27 +34,47 @@
 
                 <p>
                     <label for="notify_email">Email для уведомлений:</label>
-                    <input type="text" id="notify_email">
+                    <input type="text" id="notify_email"
+                    {% if current_user.is_authenticated %}
+                               value="{{ current_user.email }}"
+                        {% endif %}
+                    >
                 </p>
 
                 <p>
                     <label for="is_entity">Организация?</label><br>
-                    <input type="checkbox" style="width: 40px" id="is_entity">
+                    <input type="checkbox" style="width: 40px" id="is_entity"
+                    {% if current_user.is_authenticated and current_user.is_entity %}
+                               checked
+                           {% endif %}
+                    >
                 </p>
                 <div id="personal_block">
                     <p>
                         <label for="username">Имя</label>
-                        <input type="text" id="username">
+                        <input type="text" id="username"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.username }}"
+                        {% endif %}
+                        >
                     </p>
 
                     <p>
                         <label for="second_name">Фамилия</label>
-                        <input type="text" id="second_name">
+                        <input type="text" id="second_name"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.second_name }}"
+                        {% endif %}
+                        >
                     </p>
 
                     <p>
                         <label for="third_name">Отчество</label>
-                        <input type="text" id="third_name">
+                        <input type="text" id="third_name"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.third_name }}"
+                        {% endif %}
+                        >
                     </p>
 
                 </div>
@@ -62,17 +82,29 @@
                 <div id="entity_block">
                     <p>
                         <label for="entity_name">Наименование организации</label>
-                        <input type="text" id="entity_name">
+                        <input type="text" id="entity_name"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.entity_name }}"
+                        {% endif %}
+                        >
                     </p>
 
                     <p>
                         <label for="iin">ИИН</label>
-                        <input type="text" id="iin">
+                        <input type="text" id="iin"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.iin }}"
+                        {% endif %}
+                        >
                     </p>
 
                     <p>
                         <label for="ogrn">ОГРН</label>
-                        <input type="text" id="ogrn">
+                        <input type="text" id="ogrn"
+                        {% if current_user.is_authenticated %}
+                               value="{{ current_user.ogrn }}"
+                        {% endif %}
+                        >
                     </p>
                 </div>
                 <p>
