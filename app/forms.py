@@ -24,3 +24,8 @@ class RegistrationForm(FlaskForm):
 
 
     submit = SubmitField('Sign In')
+
+class ProcessPayment(FlaskForm):
+    is_entity = BooleanField('Списать бонусные рубли?', validators=[Optional()])
+
+    submit = SubmitField('Оплатить')

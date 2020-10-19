@@ -2,8 +2,9 @@ from app import app, db
 from flask import request, jsonify, render_template, redirect, url_for, flash
 from app.api import api
 from app.models import Users, Variables, Ads, Ads_updates, Time
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, ProcessPayment
 from flask_login import current_user, login_user, logout_user
+from yandex_checkout import Configuration, Payment
 from werkzeug.security import generate_password_hash
 from config import Config
 import datetime
@@ -11,6 +12,8 @@ from secrets import token_hex
 import uuid
 import base64
 import json
+import uuid
+
 
 
 def convert_status(status):
@@ -149,13 +152,14 @@ def add_add():
                           username=username,
                           second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
                           notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
-                          template_data=json.dumps(template_data), status=1, user=user, masters_money= masters_s if reffered else None)
+                          template_data=json.dumps(template_data), status=1, user=user, masters_money= masters_s if reffered else None, ref_master_id=master.id if reffered else None)
         else:
             new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name,
                           username=username,
                           second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
                           notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
-                          template_data=json.dumps(template_data), status=1,  masters_money= masters_s if reffered else None)
+                          template_data=json.dumps(template_data), status=1,  masters_money= masters_s if reffered else None, ref_master_id=master.id if reffered else None)
+
 
         db.session.add(new_ads)
         db.session.commit()
@@ -258,15 +262,32 @@ def payment():
 @app.route('/do_payment/<track_code>', methods=['POST', 'GET'])
 def do_payment(track_code):
     ad = Ads.query.filter_by(track=track_code).first()
+    form = ProcessPayment()
 
-    kassa = {
-        'track': ad.track,
-        'price': ad.price
-    }
-    ad.paid = True
-    db.session.add(ad)
-    db.session.commit()
-    return render_template('do_payment.html', pay_form=kassa)
+    if form.validate_on_submit() and form.submit.data:
+
+        Configuration.account_id = Variables.query.get(3).value
+        Configuration.secret_key = Variables.query.get(4).value
+
+
+
+        payment = Payment.create({
+            "amount": {
+                "value": ad.price,
+                "currency": "RUB"
+            },
+            "confirmation": {
+                "type": "redirect",
+                "return_url": "https://vk.com/id608742663"
+            },
+            "capture": True,
+            "description": ad.track
+        }, uuid.uuid4())
+
+        print('передано в оплату')
+        return redirect(payment.confirmation.confirmation_url)
+    return render_template('do_payment', form=form)
+
 
 
 @app.route('/edit/<track_code>', methods=['POST', 'GET'])
@@ -311,11 +332,22 @@ def edit(track_code):
 
 @app.route('/approve_payment', methods=['POST', 'GET'])
 def approve():
-    if request.method == 'POST':
-        c = request
+    if request.json['type'] == 'notification' and request.json['event'] == 'payment.succeeded':
+        paid_ad = Ads.query.filter_by(track=request.json['object']['description']).first()
+        master = Users.query.get(int(paid_ad.ref_master_id))
+
+        if master:
+            master.collected_m += paid_ad.masters_money
+            db.session.add(master)
+            db.session.commit()
+
+        paid_ad.paid = 1
+        db.session.add(paid_ad)
+        db.session.commit()
+        print('payment.succeeded')
         a = 1
         b = 2
-
+    return jsonify({'response': 'thanks'}), 200
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():

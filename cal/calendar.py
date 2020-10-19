@@ -33,7 +33,7 @@ class Calendar():
 
     def get_calendar(self, month_n, year, promo=None):
 
-        print(year)
+        print(self.today)
 
         if month_n == 0:
             year_q = year - 1
@@ -47,6 +47,7 @@ class Calendar():
             'month': self.months[0 if month_n == 12 else month_n]['name'],
             'month_n': month_n + 1,
             'year': year_q,
+            'start': self.today,
             'days': []
         }
         sale = 0

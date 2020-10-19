@@ -121,7 +121,7 @@ $(document).ready(function () {
             });
     });
 });
-
+let start = '';
 let clicked_elems = [];
 $(document).ready(function () {
 
@@ -232,6 +232,7 @@ $(document).ready(function () {
                     legs: $('#legs').val(),
                     promo: $('#promo').val(),
                     price: $('#price_input').attr('value'),
+                    start: start,
                     image: dataurl
                 },
                 type: 'POST',
@@ -269,10 +270,12 @@ $(document).ready(function () {
     let month_n = 0;
     let year = 0;
 
+
     function organise(response) {
         let i = 0;
         month_n = response.month_n;
         year = response.year;
+        start = response.start;
         $('.month').html(response.month);
         $.each(response.days, function (index, value) {
             let id = parseInt(index) + 1;

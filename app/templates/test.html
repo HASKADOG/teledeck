@@ -120,6 +120,11 @@
                         <div class="col-5"  style="padding: 0">
                             <button id="activate_promo">Активировать</button>
                         </div>
+                        {% if current_user.is_authenticated and current_user.collected_m > 0 %}
+                        <div class="col-12">
+                            У вас есть {{ current_user.collected_m }} бонусных ₽, которые вы можете списать при оплате
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
 

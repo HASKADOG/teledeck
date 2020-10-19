@@ -74,7 +74,7 @@ class Ads(db.Model):
     price = db.Column(db.Integer)
     debug = db.Column(db.String(22))
     time = db.Column(db.String(512))
-    ref_discount = db.Column(db.Integer)
+    ref_master_id = db.Column(db.Integer)
     updates = db.relationship('Ads_updates', backref='ad', lazy='dynamic')
 
     def __repr__(self):
@@ -85,7 +85,7 @@ class Ads(db.Model):
 class Variables(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(16), unique=True)
-    value = db.Column(db.Integer)
+    value = db.Column(db.String(48))
 
     def __repr__(self):
         return '<Variable name={} value={}>'.format(self.name, self.value)
