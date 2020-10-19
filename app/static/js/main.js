@@ -56,6 +56,24 @@ function validate() {
     return true
 }
 
+
+
+
+jQuery(document).ready(function () {
+    jQuery('#waste').change(function () {
+
+        let finish_price = parseInt($('#bonus').text());
+        let price = parseInt($('#price').text());
+        let total = price - finish_price;
+
+        if ($(this).prop('checked')) {
+            $('#submit').attr('value', 'Оплатить ' + total);
+        } else {
+            $('#submit').attr('value', 'Оплатить ' + price);
+        }
+    });
+});
+
 $(document).ready(function () {
     var is_entity = document.getElementById("is_entity");
     var entity = document.getElementById("entity_block");
@@ -70,7 +88,6 @@ $(document).ready(function () {
         personal.style.display = "";
     }
 });
-
 
 jQuery(document).ready(function () {
     var entity = document.getElementById("entity_block");
@@ -270,6 +287,18 @@ $(document).ready(function () {
     let month_n = 0;
     let year = 0;
 
+    function draw_clicked() {
+        for (let i_day = 1; i_day < 36; i_day++) {
+            let day_to_check = document.getElementById('day' + i_day);
+            let converted_date = day_to_check.getAttribute('data-date').replace(/\./g, "_");
+            if (clicked_elems.indexOf(converted_date) != -1) {
+                $('#day'+ i_day).addClass('day_clicked');
+            }
+            else {
+                $('#day'+ i_day).removeClass('day_clicked');
+            }
+        }
+    }
 
     function organise(response) {
         let i = 0;
@@ -315,6 +344,7 @@ $(document).ready(function () {
                 }
             });
         });
+        draw_clicked();
     }
 
     $.ajax({
@@ -355,17 +385,14 @@ $(document).ready(function () {
 
         if (price > 0 && sailed == 0) {
             calculated_price = (3000 + (3000*(counter-1)*(100-5)/100));
-            alert('1case');
         }
         else if (sailed > 0 && price == 0) {
             calculated_price = (3000 + (3000*(counter-1)*(100-5)/100))*(100-15)/100;
-            alert('2case');
         }
         else if (price > 0 && sailed > 0) {
             let saled_days_q = 1 - (counter/100*sailed);
             let sale_amount = ((3000 + (3000*(counter-1)*(100-5)/100)) * saled_days_q)/100*15;
             calculated_price = ((3000 + (3000*(counter-1)*(100-5)/100))) - sale_amount;
-            alert('3case');
         }
 
      }
@@ -382,19 +409,15 @@ $(document).ready(function () {
 
         if ($(this).attr('data-available') == "1") {
             if (clicked_elems.indexOf(choosen_day) != -1) {
-                alert('index-1');
                 $("#"+choosen_day+"_picked").remove();
                 delete clicked_elems[clicked_elems.indexOf(choosen_day)];
-                $(this).css('background','#1f2227');
-                $(this).css('color','white');
+                $(this).removeClass('day_clicked');
                 calculate_price();
             } else {
-                alert('index-2');
                 $('.info').append('<div class="added_day" data-sale="' + $(this).attr('data-sale') + '" data-date="'+ $(this).attr('data-date') +'" id=' + choosen_day + '_picked' + '>' + date + '</div>');
                 clicked_elems.push(choosen_day);
                 calculate_price()
-                $(this).css('background','white');
-                $(this).css('color','#1f2227');
+                $(this).addClass('day_clicked');
             }
         }
         $('#price').html(calculated_price);
@@ -439,6 +462,7 @@ $(document).ready(function () {
         calculated_price = 0;
         $('#price').html(calculated_price);
         $('#price_input').attr('value', calculated_price);
+        draw_clicked();
     });
 
 

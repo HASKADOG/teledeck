@@ -5,18 +5,17 @@
     <div class="container">
         <div class="row">
             <div class="col-5 login_reg_form" style="margin-bottom: 20px">
+                <span class="question">Оплата объявления {{ad.track}}</span><br>
+                <div id="price" style="display: none">{{ad.price}}</div>
+                <div id="bonus" style="display: none">{{current_user.collected_m}}</div>
                 <form class="login_reg_form" action="" method="post" novalidate>
                     {{ form.hidden_tag() }}
                 <p>
-                    {{ form.email.label }}<br>
-                    {{ form.email(size=32) }}
+                    <span>Списать бонусные {{current_user.collected_m}}₽ ?</span><br>
+                    {{ form.waste(size=32) }}
                 </p>
-                <p>
-                    {{ form.password.label }}<br>
-                    {{ form.password(size=32) }}
-                </p>
-                <p>{{ form.submit() }}</p>
-    </form>
+                <p>{{ form.submit(value=price_btn_text) }}</p>
+                </form>
             </div>
         </div>
     </div>

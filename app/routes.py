@@ -269,11 +269,11 @@ def do_payment(track_code):
         Configuration.account_id = Variables.query.get(3).value
         Configuration.secret_key = Variables.query.get(4).value
 
-
+        print(form.waste.data)
 
         payment = Payment.create({
             "amount": {
-                "value": ad.price,
+                "value": int(ad.price) - int(current_user.collected_m) if form.waste.data else ad.price,
                 "currency": "RUB"
             },
             "confirmation": {
@@ -284,9 +284,11 @@ def do_payment(track_code):
             "description": ad.track
         }, uuid.uuid4())
 
+
+
         print('передано в оплату')
         return redirect(payment.confirmation.confirmation_url)
-    return render_template('do_payment', form=form)
+    return render_template('do_payment.html', form=form, ad=ad, current_user=current_user, price_btn_text='Оплатить {}₽'.format(ad.price))
 
 
 
