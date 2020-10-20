@@ -83,7 +83,8 @@ class Calendar():
                                 now.month == date.date.month and now.year == date.date.year and date.date.day - now.day == 1) or (
                                                    now.date() >= date.date) or (date.taken == True) or (date.date == date_to_skip)) else 1,
                         'sale': sale,
-                        'date': date.date.strftime('%d.%m.%Y')
+                        'date': date.date.strftime('%d.%m.%Y'),
+                        'next_m': 0
                     }
                 )
                 sale = 0
@@ -94,7 +95,8 @@ class Calendar():
                         'number': i + 1,
                         'available': 0,
                         'sale': 0,
-                        'date': 'Нет в расписании!'
+                        'date': 'Нет в расписании!',
+                        'next_m': 0
                     }
                 )
                 sale = 0
@@ -106,13 +108,11 @@ class Calendar():
             for i in range(0, 36 - self.months[0 if month_n == 12 else month_n]['days_qty']):
                 out['days'].append(
                     {
-                        'number': month_next[i].date.day,
-                        'available': 0 if ((now.hour >= 13 and now.month > month_next[i].date.month and now.year ==
-                                            month_next[i].date.year and month_next[i].date.day - now.day == 1) or (
-                                                       now.date() >= month_next[i].date) or (
-                                                       month_next[i].taken == True)) else 1,
+                        'number': '{} >'.format(month_next[i].date.day),
+                        'available': 0,
                         'sale': sale,
-                        'date': month_next[i].date.strftime('%d.%m.%Y')
+                        'date': month_next[i].date.strftime('%d.%m.%Y'),
+                        'next_m': 1
                     }
                 )
 
@@ -121,10 +121,11 @@ class Calendar():
             for i in range(0, 36 - self.months[0 if month_n == 12 else month_n]['days_qty']):
                 out['days'].append(
                     {
-                        'number': i + 1,
+                        'number': 'X',
                         'available': 0,
                         'sale': 0,
-                        'date': 'Нет в расписании!'
+                        'date': 'Нет в расписании!',
+                        'next_m': 0
                     }
                 )
                 sale = 0

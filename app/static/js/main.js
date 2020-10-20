@@ -342,6 +342,12 @@ $(document).ready(function () {
                 if (property == 'date') {
                     $('#day' + id).attr('data-date', val);
                 }
+                if (property == 'next_m') {
+                    if (val == 1) {$('#day' + id).css('background', '#1f2227');
+                        $('#day' + id).css('cursor', 'pointer');
+                        $('#day' + id).attr('data-next', val);
+                    }
+                }
             });
         });
         draw_clicked();
@@ -406,7 +412,6 @@ $(document).ready(function () {
         let date = $(this).attr('data-date');
 
 
-
         if ($(this).attr('data-available') == "1") {
             if (clicked_elems.indexOf(choosen_day) != -1) {
                 $("#"+choosen_day+"_picked").remove();
@@ -419,6 +424,21 @@ $(document).ready(function () {
                 calculate_price()
                 $(this).addClass('day_clicked');
             }
+        }
+        else if ($(this).attr('data-next') == "1") {
+            $.ajax({
+            data: {
+                method: 'get_next_month',
+                button: 'init',
+                month_n: month_n,
+                year: year
+            },
+            type: 'POST',
+            url: '/api'
+        })
+            .done(function (data) {
+                organise(data.response)
+            });
         }
         $('#price').html(calculated_price);
         $('#price_input').attr('value', calculated_price);
