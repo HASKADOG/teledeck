@@ -267,7 +267,7 @@ def api(request):
                 print('get_calendar_date')
                 try:
                     method = data['button']
-                    cal = Calendar()
+                    cal = Calendar(datetime.datetime(2020, 10, 23, 10, 23, 32, 342))
                     resp = cal.get_calendar(datetime.date.today().month, datetime.datetime.today().year)
                     print('sent')
                     return jsonify({'response': resp})

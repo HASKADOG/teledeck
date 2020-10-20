@@ -56,18 +56,32 @@ class Calendar():
             print('|{}|{}'.format(month_n+1, year_q))
             month_db = Time.query.filter(extract('month', Time.date) == (1 if month_n + 1 == 13 else month_n + 1), extract('year', Time.date) == (year_q))
 
+            # holidays check
+            date_to_skip = 0
+            for date in month_db:
+                if date.date == now.date():
+                    if month_db[date.date.day].taken == 1 and now.hour >= 13:
+                        holidays = 0
+                        iterator = date.date.day
+                        while month_db[iterator + 1].taken == 1:
+                            holidays += 1
+                            iterator += 1
+                        date_to_skip = month_db[iterator + 1].date
+                        print('skipping {}'.format(date_to_skip))
             for date in month_db:
                 if promo:
                     promo_data = Promocodes.query.filter_by(promocode=promo).first()
                     if promo_data:
                         sale = 1 if promo_data.date_start <= date.date and promo_data.date_expires >= date.date else 0
 
+
+
                 out['days'].append(
                     {
                         'number': date.date.day,
                         'available': 0 if ((now.hour >= 13) and (
                                 now.month == date.date.month and now.year == date.date.year and date.date.day - now.day == 1) or (
-                                                   now.date() >= date.date) or (date.taken == True)) else 1,
+                                                   now.date() >= date.date) or (date.taken == True) or (date.date == date_to_skip)) else 1,
                         'sale': sale,
                         'date': date.date.strftime('%d.%m.%Y')
                     }
