@@ -35,6 +35,11 @@ class Calendar():
 
         print(self.today)
 
+        if promo:
+            promed = True
+        else:
+            promed = False
+
         if month_n == 0:
             year_q = year - 1
             month_n = 12
@@ -81,10 +86,11 @@ class Calendar():
                         'number': date.date.day,
                         'available': 0 if ((now.hour >= 13) and (
                                 now.month == date.date.month and now.year == date.date.year and date.date.day - now.day == 1) or (
-                                                   now.date() >= date.date) or (date.taken == True) or (date.date == date_to_skip)) else 1,
+                                                   now.date() >= date.date) or (date.taken == True) or (date.date == date_to_skip) or (promed and sale == 0)) else 1,
                         'sale': sale,
                         'date': date.date.strftime('%d.%m.%Y'),
-                        'next_m': 0
+                        'next_m': 0,
+                        'promed': promo if promed else 0
                     }
                 )
                 sale = 0
@@ -96,7 +102,8 @@ class Calendar():
                         'available': 0,
                         'sale': 0,
                         'date': 'Нет в расписании!',
-                        'next_m': 0
+                        'next_m': 0,
+                        'promed': 0
                     }
                 )
                 sale = 0
@@ -112,7 +119,8 @@ class Calendar():
                         'available': 0,
                         'sale': sale,
                         'date': month_next[i].date.strftime('%d.%m.%Y'),
-                        'next_m': 1
+                        'next_m': 1,
+                        'promed': 0
                     }
                 )
 
@@ -125,7 +133,8 @@ class Calendar():
                         'available': 0,
                         'sale': 0,
                         'date': 'Нет в расписании!',
-                        'next_m': 0
+                        'next_m': 0,
+                        'promed': 0
                     }
                 )
                 sale = 0

@@ -11,8 +11,12 @@
                 <form class="login_reg_form" action="" method="post" novalidate>
                     {{ form.hidden_tag() }}
                 <p>
+                    {% if is_own %}
                     <span>Списать бонусные {{current_user.collected_m}}₽ ?</span><br>
                     {{ form.waste(size=32) }}
+                    {% else %}
+                    {{ form.waste(size=32, style="display: none !important") }}
+                    {% endif %}
                 </p>
                 <p>{{ form.submit(value=price_btn_text) }}</p>
                 </form>

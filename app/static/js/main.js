@@ -286,6 +286,7 @@ $(document).ready(function () {
 
     let month_n = 0;
     let year = 0;
+    let promo = '';
 
     function draw_clicked() {
         for (let i_day = 1; i_day < 36; i_day++) {
@@ -304,6 +305,7 @@ $(document).ready(function () {
         let i = 0;
         month_n = response.month_n;
         year = response.year;
+        promo = response.promed;
         start = response.start;
         $('.month').html(response.month);
         $.each(response.days, function (index, value) {

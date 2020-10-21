@@ -80,12 +80,15 @@ def registration():
     print('bbbb')
     if form.validate_on_submit() and form.submit.data:
         print('aaaaa')
+        collected = 0
         if form.ref_code.data != '':
             ref_master = Users.query.filter_by(ref_code=form.ref_code.data).first()
             if ref_master:
                 ref_master_id = ref_master.id
+                collected = int(Variables.query.filter_by(name = 'REF_REG_BONUS').first().value)
             else:
                 ref_master_id = None
+                collected = 0
         else:
             ref_master_id = None
 
@@ -93,7 +96,7 @@ def registration():
                      password_hash=form.password.data, email=form.email.data, phone_number=form.phone_number.data,
                      is_entity=form.is_entity.data, entity_name=form.entity_name.data, iin=form.iin.data,
                      ogrn=form.ogrn.data, ref_master_code=form.ref_code.data, ref_master=ref_master_id, register_date=datetime.datetime.now(),
-                     status='user', ref_code=token_hex(3))
+                     status='user', ref_code=token_hex(3), collected_m=collected)
 
         user.set_password(form.password.data)
         db.session.add(user)
@@ -154,13 +157,13 @@ def add_add():
             new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name,
                           username=username,
                           second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
-                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
+                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo, apply_date=datetime.datetime.now(),
                           template_data=json.dumps(template_data), status=1, user=user, masters_money= masters_s if reffered else None, ref_master_id=master.id if reffered else None)
         else:
             new_ads = Ads(track=track_code, new=True, price=price, time=time, entity_name=entity_name,
                           username=username,
                           second_name=second_name, third_name=third_name, individual_phone_number=phone_number,
-                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo,
+                          notify_email=notify_email, is_entity=is_entity, iin=iin, ogrn=ogrn, promocode=promo, apply_date=datetime.datetime.now(),
                           template_data=json.dumps(template_data), status=1,  masters_money= masters_s if reffered else None, ref_master_id=master.id if reffered else None)
 
 
@@ -182,57 +185,60 @@ def lk():
     to_page = []
     for ad in users_ads:
         if ad.status == 1:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <button id="action_one" class="get_add">{}</button> <button id="action_two" class="get_add">{}</button> </div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Изменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a href="/edit/{}" id="action_one" class="get_add">{}</a> <a id="action_two" href="/cancel/{}" class="get_add">{}</a> </div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление',
+                                 ad.track,
                                  'Отменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 3:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/do_payment/5162ad" class="get_add">{}</a> <button id="action_two" class="get_add">{}</button> <button id="action_three" class="get_add">{}</button><button id="action_four" class="get_add">{}</button></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Оплатить объявление',
-                                 'Изменить объявление', 'Продлить объявление', 'Отменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/do_payment/{}" class="get_add">{}</a> <a href="/edit/{}" id="action_two" class="get_add">{}</a> <button id="action_three" class="get_add">{}</button><a id="action_four" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Оплатить объявление', ad.track,
+                                 'Изменить объявление', 'Продлить объявление', ad.track, 'Отменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 2:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a><a id="action_two" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Изменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a><a id="action_two" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление',
+                                 ad.track,
                                  'Отменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 4:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a><a id="action_two" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Отменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/cancel/{}" class="get_add">{}</a><a id="action_two" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Отменить объявление',
+                                 ad.track,
                                  'Продлить объявление')
             to_page.append(ad_el)
 
         if ad.status == 5:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Продлить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Продлить объявление')
             to_page.append(ad_el)
 
         if ad.status == 6:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Изменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 7:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Изменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 8:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Изменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 31:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Отменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Отменить объявление')
             to_page.append(ad_el)
 
         if ad.status == 71:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Вернуть на модерацию')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/moderate/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Вернуть на модерацию')
             to_page.append(ad_el)
 
     if request.method == 'POST' and request.form['update_lk'] == 'true':
@@ -264,26 +270,26 @@ def payment():
         print('2')
         ad = Ads.query.filter_by(track=request.form['track_code']).first()
         if ad.status == 1:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a href="/edit/{}" id="action_one" class="get_add">{}</a> <button id="action_two" class="get_add">{}</button> </div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a href="/edit/{}" id="action_one" class="get_add">{}</a> <a id="action_two" href="/cancel/{}" class="get_add">{}</a> </div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление', ad.track,
                                  'Отменить объявление')
             return jsonify({'ad': ad_el})
 
         if ad.status == 3:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/do_payment/5162ad" class="get_add">{}</a> <a href="/edit/{}" id="action_two" class="get_add">{}</a> <button id="action_three" class="get_add">{}</button><button id="action_four" class="get_add">{}</button></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Оплатить объявление',  ad.track,
-                                 'Изменить объявление', 'Продлить объявление', 'Отменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/do_payment/{}" class="get_add">{}</a> <a href="/edit/{}" id="action_two" class="get_add">{}</a> <button id="action_three" class="get_add">{}</button><a id="action_four" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Оплатить объявление',  ad.track,
+                                 'Изменить объявление', 'Продлить объявление', ad.track, 'Отменить объявление')
             return jsonify({'ad': ad_el})
 
         if ad.status == 2:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a><a id="action_two" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/edit/{}" class="get_add">{}</a><a id="action_two" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Изменить объявление', ad.track,
                                  'Отменить объявление')
             return jsonify({'ad': ad_el})
 
         if ad.status == 4:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a><a id="action_two" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Отменить объявление',
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/cancel/{}" class="get_add">{}</a><a id="action_two" href="/edit/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Отменить объявление', ad.track,
                                  'Продлить объявление')
             return jsonify({'ad': ad_el})
 
@@ -308,13 +314,13 @@ def payment():
             return jsonify({'ad': ad_el})
 
         if ad.status == 31:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Отменить объявление')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/cancel/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Отменить объявление')
             return jsonify({'ad': ad_el})
 
         if ad.status == 71:
-            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="" class="get_add">{}</a></div> </div> </div>'
-            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, 'Вернуть на модерацию')
+            ad_el = ' <div class="ads"> <div class="ad"> <div class="bread_crumbs"> <span class="track_code"> Трек номер: {} </span> <span class="status"> Статус: {} </span> </div> <hr> <div class="image_body"> <img src="/static/users_ads/{}.png" alt=""> </div> <hr style="margin-top: 10px !important; margin-bottom: 0 !important"> <div class="actions_ads"> <a id="action_one" href="/moderate/{}" class="get_add">{}</a></div> </div> </div>'
+            ad_el = ad_el.format(ad.track, convert_status(ad.status), ad.track, ad.track, 'Вернуть на модерацию')
             return jsonify({'ad': ad_el})
 
     return render_template('payment.html', user=current_user)
@@ -325,12 +331,23 @@ def do_payment(track_code):
     ad = Ads.query.filter_by(track=track_code).first()
     form = ProcessPayment()
 
+    if current_user.is_authenticated:
+        user = Users.query.get(current_user.id)
+
+        if ad in user.ads.all():
+            is_own = True
+        else:
+            is_own = False
+    else:
+        is_own = False
+
     if form.validate_on_submit() and form.submit.data:
 
         Configuration.account_id = Variables.query.get(3).value
         Configuration.secret_key = Variables.query.get(4).value
 
         print(form.waste.data)
+
 
         payment = Payment.create({
             "amount": {
@@ -342,14 +359,19 @@ def do_payment(track_code):
                 "return_url": "https://vk.com/id608742663"
             },
             "capture": True,
-            "description": ad.track
+            "description": "Оплата объявления {}".format(ad.track),
+            "metadata": {
+                "track": ad.track,
+                "bonus_used": 1 if form.waste.data else 0,
+                "payer": current_user.id
+            }
         }, uuid.uuid4())
 
 
 
         print('передано в оплату')
         return redirect(payment.confirmation.confirmation_url)
-    return render_template('do_payment.html', form=form, ad=ad, current_user=current_user, price_btn_text='Оплатить {}₽'.format(ad.price))
+    return render_template('do_payment.html', form=form, ad=ad, is_own = is_own, current_user=current_user, price_btn_text='Оплатить {}₽'.format(ad.price))
 
 
 
@@ -384,6 +406,7 @@ def edit(track_code):
             "legs": data['legs']
         })
         ad.edited = True
+        ad.status = 1
 
         db.session.add(ad)
         db.session.commit()
@@ -396,14 +419,22 @@ def edit(track_code):
 @app.route('/approve_payment', methods=['POST', 'GET'])
 def approve():
     if request.json['type'] == 'notification' and request.json['event'] == 'payment.succeeded':
-        paid_ad = Ads.query.filter_by(track=request.json['object']['description']).first()
-        master = Users.query.get(int(paid_ad.ref_master_id))
+        paid_ad = Ads.query.filter_by(track=request.json['object']['metadata']['track']).first()
+        if paid_ad.ref_master_id:
+            master = Users.query.get(int(paid_ad.ref_master_id))
+        else:
+            master = False
+
+        if request.json['object']['metadata']['bonus_used'] == '1':
+            user = Users.query.get(request.json['object']['metadata']['payer'])
+            user.collected_m = 0
+            db.session.add(user)
+            db.session.commit()
 
         if master:
             master.collected_m += paid_ad.masters_money
             db.session.add(master)
             db.session.commit()
-
         paid_ad.paid = 1
         db.session.add(paid_ad)
         db.session.commit()
@@ -416,6 +447,14 @@ def approve():
 def cancel(track):
     ad = Ads.query.filter_by(track=track).first()
     ad.status = 7
+    db.session.add(ad)
+    db.session.commit()
+    return redirect(url_for('payment'))
+
+@app.route('/moderate/<track>', methods=['POST', 'GET'])
+def moderate(track):
+    ad = Ads.query.filter_by(track=track).first()
+    ad.status = 1
     db.session.add(ad)
     db.session.commit()
     return redirect(url_for('payment'))
