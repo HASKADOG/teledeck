@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="lk-wrap">
+<div class="lk-wrap login_reg">
     <div class="container">
         <div class="row">
-            <div class="col-5 login_reg_form">
+            <div class="col-lg-5 col-md-8 login_reg_form">
                 <h1>Личный кабинет</h1>
                 <p>
                     <label for="username">Имя</label>
@@ -42,19 +42,26 @@
                     <label for="ogrn">ОГРН</label>
                     <input type="text" id="ogrn" value="{{ user.ogrn }}">
                 </p>
+
+                <button id="update_lk" class="save_lk">Сохранить</button>
+                <br>
+<br>
+            </div>
+            <div class="col-5">
                 <p>
                     <label for="ref_code">Ваш реферальный код: </label>
-                    <span class="ref_code">{{ user.ref_code }}</span><br>
+                    <span class="ref_code" style="color: #FAA61A">{{ user.ref_code }}</span><br>
                     <label for="ref_code">Реф. ссылка: </label><br>
                     <span class="ref_code">https://теледоска.рф/registration?ref_code={{ user.ref_code }}</span><br>
                 </p>
                 <p>
                     <label for="ogrn">Накопленные рубли:</label>
-                    <span class="ref_code">{{ user.collected_m }}₽</span><br>
+                    <span class="ref_code" style="color: #FAA61A; font-size: 24px;">{{ user.collected_m }}₽</span><br>
                 </p>
-                <button id="update_lk">Сохранить</button>
-                <br>
-<br>
+                <span style="font-size: 24px;">Ваши объявления: </span>
+                {% for ad in users_ads %}
+                    <div style="margin-top: 20px">{{ad | safe}}</div>
+                {% endfor %}
             </div>
         </div>
     </div>

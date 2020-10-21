@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-
+<style>
+    body{
+        width: 1920px !important;
+    }
+</style>
+<div class="adder">
 <div class="font_loader">
     <div class="annonymous">a</div>
     <div class="annonymous-bold">a</div>
@@ -136,8 +140,8 @@
 
                 </div>
                 <div class="col-7"></div>
-                                    <div class="container">
-                      <div class="row">
+                                    <div class="container" style="transform: translateX(11px)">
+                      <div class="row" style="width: 1192px !important">
                         <div class="col-4 calendar">
                           <div class="container">
                             <div class="row month_shifter">
@@ -346,4 +350,5 @@
 <script src=" {{ url_for('static', filename='js/jcanvas.js') }} "></script>
 
 <script src=" {{ url_for('static', filename='js/img.js') }} "></script>
+</div>
 {% endblock %}

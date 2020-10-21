@@ -21,13 +21,18 @@
                         <img src="{{ url_for('static', filename='img/header-logo.svg') }}" alt="" class="phone-icon">
                         <a href="tel:+78432030303" class="phone-number">( 843 ) 203 - 03 - 30</a>
                     </div>
-                    <div class="col-xl-5 col-lg-6 header-menu">
+                    <div class="col-xl-7 col-lg-7 header-menu">
                         <div class="container">
                             <div class="row justify-content-between">
                                 <div class="menu-elem elem-one"><a href="/add_add" class="one">Создать объявление</a></div>
-                                <div class="menu-elem elem-two"><span class="two">Оплата</span></div>
-                                <div class="menu-elem elem-three"><span class="three">Продление</span></div>
-                                <div class="menu-elem elem-four"><span class="four">Редактирование</span></div>
+                                <div class="menu-elem elem-two"><a href="/payment" class="two">Оплата</a></div>
+                                <div class="menu-elem elem-three"><a href="/payment" class="three">Поиск по трек номеру</a></div>
+								{% if current_user.is_authenticated %}
+                                <div class="menu-elem elem-four"><a href="/lk" class="four">Личный кабинет</a></div>
+								<div class="menu-elem elem-four"><a href="/logout" class="four">Выход</a></div>
+								{% else %}
+                                <div class="menu-elem elem-four"><a href="/login" class="four">Вход/Регистарация</a></div>
+								{% endif %}
                             </div>
                         </div>
                     </div>
@@ -39,11 +44,16 @@
         </section>
 
         	<div class="menuphka">
-							<div class=""><span class="">Создать объявление</span></div><br>
-							<div class=""><span class="">Оплата</span></div><br>
-							<div class=""><span class="">Продление</span></div><br>
-							<div class=""><span class="">Редактирование</span></div><br>
-							<div class="dualshock"><span class="">Закрыть меню</span></div><br>
+							<div class=""><a class="" href="/add_add">Создать объявление</a></div><br>
+							<div class=""><a class="" href="/payment">Оплата</a></div><br>
+							<div class=""><a class="" href="/lk">Поиск по трек номеру</a></div><br>
+							{% if current_user.is_authenticated %}
+							<div class=""><a class="" href="/lk">Личный кабинет</a></div><br>
+							<div class=""><a class="" href="/logout">Выход</a></div><br>
+							{% else %}
+							<div class=""><a class="" href="/login">Вход/Регистрация</a></div><br>
+							{% endif %}
+							<div class="dualshock"><a class="">Закрыть меню</a></div><br>
 	        </div>
 
         {% block content %}{% endblock %}

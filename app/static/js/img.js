@@ -1,8 +1,16 @@
 const canvas = document.getElementById('img');
 const ctx = canvas.getContext('2d');
 
+let first = 1;
+
 var template_one = new Image();
-template_one.src = '/static/template_img/tmp1_render.png';
+if ($('#track_code').val() == 'none') {
+    template_one.src = '/static/template_img/tmp1_render.png';
+}
+else {
+    template_one.src = '/static/users_ads/'+ $('#track_code').val() +'.png';
+    first += 1;
+}
 
 var template_two = new Image();
 template_two.src = '/static/template_img/tmp2_render.png';
@@ -33,6 +41,9 @@ template_one.onload = function () {
 
 
 function render(template_num, is_alpha) {
+
+
+
     var template_choose = template_num;
     var template = template_choose.options[template_choose.selectedIndex].value;
     var red = document.getElementById('text_in_red');
@@ -42,7 +53,11 @@ function render(template_num, is_alpha) {
         canvas.width = template_one.width;
         canvas.height = template_one.height;
         red.value = '';
+
+
         ctx.drawImage(template_one, 0, 0);
+
+
     }
 
     if ((template == 'two') && (is_alpha == 0)) {
