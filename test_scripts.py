@@ -1,21 +1,14 @@
-import uuid
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
-from yandex_checkout import Configuration, Payment
+msg = MIMEMultipart()
 
-Configuration.account_id = '501490'
-Configuration.secret_key = 'test_aDEqLUxN9tfEWmK3vRb5R2b8x6PULdS_62Y6o77B_8w'
+to_email = 'cplasplas16@gmail.com'
+message = 'IS THIS A real life&'
 
-payment = Payment.create({
-    "amount": {
-        "value": "1.00",
-        "currency": "RUB"
-    },
-    "confirmation": {
-        "type": "redirect",
-        "return_url": "https://vk.com/id608742663"
-    },
-    "capture": True,
-    "description": "Заказ №1"
-}, uuid.uuid4())
+msg.attach(MIMEText(message, 'plain'))
 
-a = 1
+server = smtplib.SMTP('smtp.timeweb.ru:2525')
+server.login('teledoska@369525-ct08796.tmweb.ru', 'qwe123qwe123')
+server.sendmail('teledoska@369525-ct08796.tmweb.ru', to_email, msg.as_string())

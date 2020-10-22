@@ -103,12 +103,12 @@
 									<div class="container">
 										<div class="row justify-content-between">
 											<div class="name">
-												<img src="{{ url_for('static', filename='img/inst_colored.svg" class="service-icon service-inst') }}" alt="">
+												<img src="{{ url_for('static', filename='img/inst_colored.svg') }}"  class="service-icon service-inst" alt="">
 												<span class="service-name" style="transform: translate(0px, 1px); display: inline-block;">Instagram</span>
 											</div>
 											<div class="amount">
-												<img src="{{ url_for('static', filename='img/pointer_green.svg" class="services-pointer') }}" alt="">
-												<img src="{{ url_for('static', filename='img/user_icon.svg" class="service-client') }}" alt="">
+												<img src="{{ url_for('static', filename='img/pointer_green.svg') }}" class="services-pointer" alt="">
+												<img src="{{ url_for('static', filename='img/user_icon.svg') }}" class="service-client" alt="">
 												<span class="users">40 000</span>
 											</div>
 										</div>
@@ -118,12 +118,12 @@
 									<div class="container">
 										<div class="row justify-content-between">
 											<div class="name">
-												<img src="{{ url_for('static', filename='img/vk_colored.svg" class="service-icon service-vk') }}" alt="">
+												<img src="{{ url_for('static', filename='img/vk_colored.svg') }}" class="service-icon service-vk" alt="">
 												<span class="service-name" style="transform: translate(0px, 1px); display: inline-block;">ВКонтакте</span>
 											</div>
 											<div class="amount">
-												<img src="{{ url_for('static', filename='img/pointer_red.svg" class="services-pointer') }}" alt="">
-												<img src="{{ url_for('static', filename='img/user_icon.svg" class="service-client') }}" alt="">
+												<img src="{{ url_for('static', filename='img/pointer_red.svg') }}" class="services-pointer" alt="">
+												<img src="{{ url_for('static', filename='img/user_icon.svg') }}" class="service-client" alt="">
 												<span class="users">40 000</span>
 											</div>
 										</div>
@@ -133,12 +133,12 @@
 									<div class="container">
 										<div class="row justify-content-between">
 											<div class="name">
-												<img src="{{ url_for('static', filename='img/odno_colored.svg" class="service-icon service-ok') }}" alt="">
+												<img src="{{ url_for('static', filename='img/odno_colored.svg') }}" class="service-icon service-ok" alt="">
 												<span class="service-name" style="transform: translate(0px, 1px); display: inline-block;">ОК</span>
 											</div>
 											<div class="amount">
-												<img src="{{ url_for('static', filename='img/pointer_green.svg" class="services-pointer') }}" alt="">
-												<img src="{{ url_for('static', filename='img/user_icon.svg" class="service-client') }}" alt="">
+												<img src="{{ url_for('static', filename='img/pointer_green.svg') }}" class="services-pointer" alt="">
+												<img src="{{ url_for('static', filename='img/user_icon.svg') }}" class="service-client" alt="">
 												<span class="users">40 000</span>
 											</div>
 										</div>
@@ -148,12 +148,12 @@
 									<div class="container">
 										<div class="row justify-content-between">
 											<div class="name">
-												<img src="{{ url_for('static', filename='img/mytarget_colored.png" class="service-icon service-mytarget') }}" alt="">
+												<img src="{{ url_for('static', filename='img/mytarget_colored.png') }}" class="service-icon service-mytarget" alt="">
 												<span class="service-name" style="padding-left: 6px; transform: translate(0px, 1px); display: inline-block;">MyTarget</span>
 											</div>
 											<div class="amount">
-												<img src="{{ url_for('static', filename='img/pointer_green.svg" class="services-pointer') }}" alt="">
-												<img src="{{ url_for('static', filename='img/user_icon.svg" class="service-client') }}" alt="">
+												<img src="{{ url_for('static', filename='img/pointer_green.svg') }}" class="services-pointer" alt="">
+												<img src="{{ url_for('static', filename='img/user_icon.svg') }}" class="service-client" alt="">
 												<span class="users">40 000</span>
 											</div>
 										</div>
@@ -183,7 +183,7 @@
 												</div>
 												<div class="w-100"></div>
 												<div class="col align-self-end try-us-btn-row">
-													<button class="apply" data-toggle="modal" data-target="#mmmodality">Подать объявление</button>
+													<a class="apply" href="/add_add">Подать объявление</a>
 												</div>
 											</div>
 										</div>
@@ -286,7 +286,7 @@
 			<div class="container order">
 				<div class="row justify-content-center align-items-end">
 					<div class="col-lg-3 col-9 col-md-4 col-sm-6">
-						<button class="apply" data-toggle="modal" data-target="#mmmodality">Подать объявление</button>
+						<a class="apply" href="/add_add">Подать объявление</a>
 					</div>
 				</div>
 			</div>
