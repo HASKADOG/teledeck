@@ -55,14 +55,17 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
+    incorrect = ''
     if form.validate_on_submit():
         user = Users.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
+            print('Invalid username or password')
+            incorrect = '<script>alert("Неверный email или пароль");</script>'
+
+            return render_template('login.html', title='Sign In', form=form, incorrect=incorrect)
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html', title='Sign In', form=form, incorrect=incorrect)
 
 
 @app.route('/registration', methods=['GET', 'POST'])
@@ -172,7 +175,21 @@ def add_add():
         # db.session.add(time_to)
         db.session.commit()
         return jsonify({'response': 'Отправлено на модерацию. Трек-код: {}'.format(track_code)})
-    return render_template('test.html', current_user=current_user)
+
+    curr = current_user
+    if curr.iin is None:
+        curr.iin = ''
+    else:
+        curr.iin = current_user.iin
+
+    if curr.ogrn is None:
+        curr.ogrn = ''
+    else:
+        curr.ogrn = current_user.ogrn
+
+    a = 1
+
+    return render_template('test.html', current_user=curr)
 
 
 @app.route('/lk', methods=['GET', 'POST'])

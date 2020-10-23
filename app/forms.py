@@ -6,7 +6,7 @@ class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня?')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Войти')
 
 class RegistrationForm(FlaskForm):
     login = StringField('Имя', validators=[Optional()])
@@ -23,7 +23,7 @@ class RegistrationForm(FlaskForm):
     ref_code = StringField('Реферальный код', validators=[Optional()])
 
 
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Зарегистрироваться')
 
 class ProcessPayment(FlaskForm):
     waste = BooleanField('Списать бонусные рубли?', validators=[Optional()])

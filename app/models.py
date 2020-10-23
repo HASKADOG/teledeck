@@ -20,8 +20,8 @@ class Users(UserMixin, db.Model):
     third_name = db.Column(db.String(64))
     is_entity = db.Column(db.Boolean)
     entity_name = db.Column(db.String(64))
-    iin = db.Column(db.Integer)
-    ogrn = db.Column(db.Integer)
+    iin = db.Column(db.BigInteger)
+    ogrn = db.Column(db.BigInteger)
     email = db.Column(db.String(128), unique=True)
     password_hash = db.Column(db.String(128))
     phone_number = db.Column(db.BigInteger)
@@ -50,8 +50,8 @@ class Ads(db.Model):
     notify_email = db.Column(db.String(128))
     is_entity = db.Column(db.Boolean)
     entity_name = db.Column(db.String(64))
-    iin = db.Column(db.Integer)
-    ogrn = db.Column(db.Integer)
+    iin = db.Column(db.BigInteger)
+    ogrn = db.Column(db.BigInteger)
     username = db.Column(db.String(64))
     second_name = db.Column(db.String(64))
     third_name = db.Column(db.String(64))
@@ -73,6 +73,7 @@ class Ads(db.Model):
     time = db.Column(db.String(512))
     ref_master_id = db.Column(db.Integer)
     updates = db.relationship('Ads_updates', backref='ad', lazy='dynamic')
+    payments = db.relationship('Payment_history', backref = 'payment', lazy='dynamic')
 
     def __repr__(self):
         return '<Ad id={}>'.format(self.id)
@@ -95,6 +96,7 @@ class Ads_updates(db.Model):
     status = db.Column(db.Integer)
     comment = db.Column(db.String(64))
     author = db.Column(db.String(64))
+    date = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<Update id={}>'.format(self.id)
@@ -114,3 +116,9 @@ class Promocodes(db.Model):
     date_start = db.Column(db.Date)
     date_expires = db.Column(db.Date)
     discount = db.Column(db.Integer)
+
+class Payment_history(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.DateTime()
+    sum = db.Integer()
+    ad_id = db.Column(db.Integer, db.ForeignKey('ads.id'))

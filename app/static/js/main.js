@@ -11,6 +11,15 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#mulo").mask("");
 });
+$(document).ready(function () {
+    $("#phone_number").mask('89999999999');
+});
+$(document).ready(function () {
+    $("#ogrn").mask('9999999999999');
+});
+$(document).ready(function () {
+    $("#iin").mask('999999999999');
+});
 
 function validate() {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
