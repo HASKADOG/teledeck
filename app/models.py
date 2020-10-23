@@ -72,6 +72,7 @@ class Ads(db.Model):
     debug = db.Column(db.String(22))
     time = db.Column(db.String(512))
     ref_master_id = db.Column(db.Integer)
+    bonus_used = db.Column(db.Boolean)
     updates = db.relationship('Ads_updates', backref='ad', lazy='dynamic')
     payments = db.relationship('Payment_history', backref = 'payment', lazy='dynamic')
 
@@ -119,6 +120,6 @@ class Promocodes(db.Model):
 
 class Payment_history(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.DateTime()
-    sum = db.Integer()
+    date = db.Column(db.DateTime)
+    sum = db.Column(db.Integer)
     ad_id = db.Column(db.Integer, db.ForeignKey('ads.id'))

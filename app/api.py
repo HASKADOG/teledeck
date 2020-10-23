@@ -1,9 +1,33 @@
 import json
 from app.models import Users, Ads, Variables, Ads_updates
+from notifier import  send_email
 from app import db
 from flask import jsonify
 from cal import Calendar
 import datetime
+
+
+def convert_status(status):
+    if status == 1:
+        return 'Ожидает модерации'
+    if status == 2:
+        return 'Досылка документов'
+    if status == 3:
+        return 'Ожидает оплаты'
+    if status == 4:
+        return 'Транслируется'
+    if status == 5:
+        return 'Завершено'
+    if status == 6:
+        return 'Отклонено'
+    if status == 7:
+        return 'Отменено'
+    if status == 8:
+        return 'Отменено с возвратом'
+    if status == 31:
+        return 'Оплачено'
+    if status == 71:
+        return 'Ожидает отмены'
 
 def api(request):
 
@@ -48,6 +72,8 @@ def api(request):
                         update = Ads_updates(ad=ad, status=data['STATUS'], comment=data['COMMENT'],author=data['AUTHOR'])
                         db.session.add(update)
                         db.session.commit()
+                        print(data['STATUS'])
+                        send_email(ad.notify_email,'Вашему объявлению присвоен статус "{}". Трек номер объявления: {}'.format(convert_status(int(data['STATUS'])), ad.track))
                         return json.dumps({'RESPONSE': 'ad {} updated successfully'.format(data['TRACK_CODE'])}), 200
                     else:
                         return json.dumps({'RESPONSE': 'ad does not exist'}), 200

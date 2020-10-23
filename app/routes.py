@@ -1,10 +1,11 @@
 from app import app, db
 from flask import request, jsonify, render_template, redirect, url_for, flash
 from app.api import api
-from app.models import Users, Variables, Ads, Ads_updates, Time
+from app.models import Users, Variables, Ads, Ads_updates, Time, Payment_history
 from app.forms import LoginForm, RegistrationForm, ProcessPayment
 from flask_login import current_user, login_user, logout_user
 from yandex_checkout import Configuration, Payment
+from notifier import send_email
 from werkzeug.security import generate_password_hash
 from config import Config
 import datetime
@@ -92,6 +93,7 @@ def registration():
             else:
                 ref_master_id = None
                 collected = 0
+
         else:
             ref_master_id = None
 
@@ -105,6 +107,9 @@ def registration():
         db.session.add(user)
         db.session.commit()
         print('done')
+        print(form.email.data)
+        send_email(form.email.data, 'Ваш аккаунт на теледоска.рф успешно зарегистрирован!')
+
     return render_template('registration.html', title='Registration', form=form, ref_code=ref_code)
 
 
@@ -120,7 +125,9 @@ def add_add():
             reffered = True
         else:
             reffered = False
-
+    else:
+        reffered = False
+        user = False
 
 
     # times = Time.query.filter_by(taken=False).all()
@@ -174,18 +181,20 @@ def add_add():
         db.session.commit()
         # db.session.add(time_to)
         db.session.commit()
+        send_email(notify_email, 'Объявление {} успешно создано! После модерации Вам поступит уведомление'.format(track_code))
         return jsonify({'response': 'Отправлено на модерацию. Трек-код: {}'.format(track_code)})
 
     curr = current_user
-    if curr.iin is None:
-        curr.iin = ''
-    else:
-        curr.iin = current_user.iin
+    if current_user.is_authenticated:
+        if curr.iin is None:
+            curr.iin = ''
+        else:
+            curr.iin = current_user.iin
 
-    if curr.ogrn is None:
-        curr.ogrn = ''
-    else:
-        curr.ogrn = current_user.ogrn
+        if curr.ogrn is None:
+            curr.ogrn = ''
+        else:
+            curr.ogrn = current_user.ogrn
 
     a = 1
 
@@ -269,12 +278,12 @@ def lk():
         user.email = data['email']
         user.is_entity = False if data['is_entity'] == 'False' else True
         user.entity_name = data['entity_name']
-        user.iin = None if data['iin'] == 'None' else data['iin']
-        user.ogrn = None if data['ogrn'] == 'None' else data['ogrn']
+        user.iin = None if data['iin'] == '' else data['iin']
+        user.ogrn = None if data['ogrn'] == '' else data['ogrn']
 
         db.session.add(user)
         db.session.commit()
-
+        send_email(user.email, 'Ваш аккаунт на теледоска.рф успешно обновлен')
         print()
         return jsonify({'response': 'Успешно обновлено!'})
 
@@ -380,7 +389,7 @@ def do_payment(track_code):
             "metadata": {
                 "track": ad.track,
                 "bonus_used": 1 if form.waste.data else 0,
-                "payer": current_user.id
+                "payer": current_user.id if is_own else 'unregistered user'
             }
         }, uuid.uuid4())
 
@@ -437,6 +446,8 @@ def edit(track_code):
 def approve():
     if request.json['type'] == 'notification' and request.json['event'] == 'payment.succeeded':
         paid_ad = Ads.query.filter_by(track=request.json['object']['metadata']['track']).first()
+        history = Payment_history(date = datetime.datetime.now(), sum = request.json['object']['amount']['value'].split('.')[0], payment = paid_ad)
+
         if paid_ad.ref_master_id:
             master = Users.query.get(int(paid_ad.ref_master_id))
         else:
@@ -445,6 +456,7 @@ def approve():
         if request.json['object']['metadata']['bonus_used'] == '1':
             user = Users.query.get(request.json['object']['metadata']['payer'])
             user.collected_m = 0
+            paid_ad.bonus_used = True
             db.session.add(user)
             db.session.commit()
 
@@ -453,8 +465,13 @@ def approve():
             db.session.add(master)
             db.session.commit()
         paid_ad.paid = 1
+        paid_ad.status = 31
         db.session.add(paid_ad)
         db.session.commit()
+        db.session.add(history)
+        db.session.commit()
+        send_email(paid_ad.notify_email, 'Оплата объявления {} на сумму {}₽ прошла успешно'.format(request.json['object']['metadata']['track'], request.json['object']['amount']['value'].split('.')[0]))
+        print()
         print('payment.succeeded')
         a = 1
         b = 2
@@ -463,9 +480,11 @@ def approve():
 @app.route('/cancel/<track>', methods=['POST', 'GET'])
 def cancel(track):
     ad = Ads.query.filter_by(track=track).first()
-    ad.status = 7
+    ad.status = 71
     db.session.add(ad)
     db.session.commit()
+    send_email(ad.notify_email,'Объявление {} ожидает отмены'.format(ad.track))
+    print('{} canceled'.format(ad.track))
     return redirect(url_for('payment'))
 
 @app.route('/moderate/<track>', methods=['POST', 'GET'])
@@ -474,6 +493,7 @@ def moderate(track):
     ad.status = 1
     db.session.add(ad)
     db.session.commit()
+    send_email(ad.notify_email, 'Объявление {} возвращено на модерацию'.format(ad.track))
     return redirect(url_for('payment'))
 
 @app.route('/logout', methods=['GET', 'POST'])
