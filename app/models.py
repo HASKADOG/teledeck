@@ -32,6 +32,7 @@ class Users(UserMixin, db.Model):
     collected_m = db.Column(db.Integer)
     ads = db.relationship('Ads', backref='user', lazy='dynamic')
     ref_master = db.Column(db.Integer)
+    tokens = db.relationship('Restore_tokens', backref='account_to_restore', lazy='dynamic')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -123,3 +124,10 @@ class Payment_history(db.Model):
     date = db.Column(db.DateTime)
     sum = db.Column(db.Integer)
     ad_id = db.Column(db.Integer, db.ForeignKey('ads.id'))
+
+class Restore_tokens(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date_expires = db.Column(db.DateTime)
+    token = db.Column(db.String(32))
+    wasted = db.Column(db.Boolean)
+    acc_to_restore = db.Column(db.Integer, db.ForeignKey('users.id'))

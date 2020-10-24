@@ -157,7 +157,6 @@ $(document).ready(function () {
         $.each(added_days, function (index, value) {
             clicked_elems.push(value.getAttribute('data-date').replace(/\./g, "_"));
         });
-        alert(clicked_elems);
     }
 
     $('#moderate').click(function () {

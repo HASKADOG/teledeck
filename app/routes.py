@@ -1,13 +1,14 @@
 from app import app, db
 from flask import request, jsonify, render_template, redirect, url_for, flash
 from app.api import api
-from app.models import Users, Variables, Ads, Ads_updates, Time, Payment_history
-from app.forms import LoginForm, RegistrationForm, ProcessPayment
+from app.models import Users, Variables, Ads, Ads_updates, Time, Payment_history, Restore_tokens
+from app.forms import LoginForm, RegistrationForm, ProcessPayment, RestorePassword, PasswordRestoration
 from flask_login import current_user, login_user, logout_user
 from yandex_checkout import Configuration, Payment
 from notifier import send_email
 from werkzeug.security import generate_password_hash
 from config import Config
+from datetime import timedelta
 import datetime
 from secrets import token_hex
 import uuid
@@ -495,6 +496,58 @@ def moderate(track):
     db.session.commit()
     send_email(ad.notify_email, 'Объявление {} возвращено на модерацию'.format(ad.track))
     return redirect(url_for('payment'))
+
+@app.route('/restore_password', methods=['POST', 'GET'])
+def restore_password():
+    form = RestorePassword()
+    incorrect = ''
+
+    try:
+        if request.args['msg']:
+            incorrect = '<script>alert("{}");</script>'.format(request.args['msg'])
+            return render_template('restore_password.html', form=form, incorrect=incorrect)
+        else:
+            ref_code = ''
+    except:
+        ref_code = ''
+
+    if form.validate_on_submit() and form.submit.data:
+        user = Users.query.filter_by(email=form.email.data).first()
+        if user:
+            now = datetime.datetime.now()
+            hex = token_hex(16)
+            token = Restore_tokens(date_expires=now + timedelta(days=1), token=hex, account_to_restore=user)
+            db.session.add(token)
+            db.session.commit()
+            send_email(user.email, 'Ссылка для восстановления пароля: https://теледоска.рф/password_restoration/{}'.format(hex))
+            incorrect = '<script>alert("Ссылка на восстановление пароля отправлена на Вашу почту");</script>'
+            return render_template('restore_password.html', form=form, incorrect=incorrect)
+        else:
+            incorrect = '<script>alert("Неверный email");</script>'
+        return render_template('restore_password.html', form=form, incorrect=incorrect)
+    return render_template('restore_password.html', form=form, incorrect=incorrect)
+
+@app.route('/password_restoration/<token>', methods=['POST', 'GET'])
+def password_restoration(token):
+    form = PasswordRestoration()
+
+    incorrect = ''
+
+    restoration_token = Restore_tokens.query.filter_by(token=token).first()
+    if restoration_token:
+        if restoration_token.date_expires < datetime.datetime.now():
+            return redirect('/restore_password?msg=Запрос на восстановление истек')
+    else:
+        return redirect('/restore_password?msg=Неверная ссылка')
+
+    if form.validate_on_submit() and form.submit.data:
+        user = Users.query.get(restoration_token.acc_to_restore)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        return redirect('/login')
+    return render_template('password_restoration.html', form = form, incorrect = incorrect)
+
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():

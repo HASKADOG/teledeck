@@ -29,3 +29,14 @@ class ProcessPayment(FlaskForm):
     waste = BooleanField('Списать бонусные рубли?', validators=[Optional()])
 
     submit = SubmitField('Оплатить')
+
+class RestorePassword(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+
+    submit = SubmitField('Восстановить пароль')
+
+class PasswordRestoration(FlaskForm):
+    password = PasswordField('Пароль')
+    password_confirm = PasswordField('Повторите пароль', validators=[Optional()])
+
+    submit = SubmitField('Изменить пароль')
