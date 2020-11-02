@@ -5,6 +5,7 @@ from app.models import Users, Variables, Ads, Ads_updates, Time, Payment_history
 from app.forms import LoginForm, RegistrationForm, ProcessPayment, RestorePassword, PasswordRestoration
 from flask_login import current_user, login_user, logout_user
 from yandex_checkout import Configuration, Payment
+from sqlalchemy import exc
 from notifier import send_email
 from werkzeug.security import generate_password_hash
 from config import Config
@@ -73,6 +74,7 @@ def login():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     form = RegistrationForm()
+
     try:
         if request.args['ref_code']:
             ref_code = request.args['ref_code']
@@ -80,6 +82,17 @@ def registration():
             ref_code = ''
     except:
         ref_code = ''
+
+    try:
+        if request.args['msg']:
+            incorrect = '<script>alert("{}");</script>'.format(request.args['msg'])
+            return render_template('registration.html', title='Registration', form=form, ref_code=ref_code,
+                                   incorrect=incorrect)
+        else:
+            ref_code = ''
+    except:
+        ref_code = ''
+
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     print('bbbb')
@@ -106,10 +119,15 @@ def registration():
 
         user.set_password(form.password.data)
         db.session.add(user)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except exc.IntegrityError:
+            return redirect('/registration?msg=Неверные данные или Email уже зарегистрирован')
         print('done')
         print(form.email.data)
         send_email(form.email.data, 'Ваш аккаунт на теледоска.рф успешно зарегистрирован!')
+
+
 
     return render_template('registration.html', title='Registration', form=form, ref_code=ref_code)
 
@@ -199,7 +217,7 @@ def add_add():
 
     a = 1
 
-    return render_template('test.html', current_user=curr)
+    return render_template('test.html', current_user=curr, page_width='1920px')
 
 
 @app.route('/lk', methods=['GET', 'POST'])
@@ -440,7 +458,7 @@ def edit(track_code):
 
         return jsonify({'response': 'Изменено и отправено на модерацию'})
 
-    return render_template('edit.html', ad=ad, days=added_days, template_data=template_data)
+    return render_template('edit.html', ad=ad, days=added_days, template_data=template_data, page_width='1920px')
 
 
 @app.route('/approve_payment', methods=['POST', 'GET'])
@@ -523,7 +541,7 @@ def restore_password():
             incorrect = '<script>alert("Ссылка на восстановление пароля отправлена на Вашу почту");</script>'
             return render_template('restore_password.html', form=form, incorrect=incorrect)
         else:
-            incorrect = '<script>alert("Неверный email");</script>'
+            incorrect = '<script>alert("Такой email не зарегистрирован");</script>'
         return render_template('restore_password.html', form=form, incorrect=incorrect)
     return render_template('restore_password.html', form=form, incorrect=incorrect)
 

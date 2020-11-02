@@ -7,7 +7,13 @@
 	    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 	    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
 	    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<meta name="viewport" content="width={% if page_width %}
+												{{ page_width }}
+												{% else %}
+												device-width
+												{% endif %}
+		, initial-scale=1.0">
     </head>
     <body>
         <section class="header">
