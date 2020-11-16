@@ -239,6 +239,7 @@
 						margin-top: 6px
 						margin-bottom: 6px
 						cursor: pointer
+						width: 16px
 					.try-us
 						height: 100%
 						color: #fff
@@ -586,7 +587,7 @@
 				padding-left: 15px
 				.schedule
 					.comparison
-						height: 328px
+						height: 420px
 						min-width: 287px
 						max-width: 287px
 						margin: auto
@@ -757,7 +758,7 @@
 				position: absolute
 				top: -2px
 				left: 46%
-			width: 403px
+			width: 595px
 			border-radius: 20px
 			margin: auto
 			.modal-header
@@ -767,7 +768,6 @@
 				font-size: 24px
 				color: #282828
 			.modal-body
-				padding: 0 50px 50px 50px
 				#name_err
 					display: inline-block
 					text-align: right
@@ -927,7 +927,9 @@
 	background: #F28B02
 	padding: 10px 15px
 	border: none
-	border-radius: 15px
+	height: 50px
+
+	border-radius: 25px
 	color: white
 	margin-top: 10px
 
@@ -944,24 +946,24 @@
 		border: none
 		color: white
 #image_in_lb
-	background: red
+	color: black
+	background: #efefef
 	width: 100%
 	height: 40px
 	line-height: 40px
-	color: white
 	padding-left: 5px
-	border-radius: 15px
+	border-radius: 5px
 	margin-top: 10px
 	cursor: pointer
 
 #image_uniq_lb
-	background: red
+	background: #efefef
 	width: 100%
 	height: 40px
 	line-height: 40px
-	color: white
+	color: black
 	padding-left: 5px
-	border-radius: 15px
+	border-radius: 5px
 	margin-top: 10px
 	cursor: pointer
 
@@ -1026,12 +1028,11 @@
 
 .calendar
 	border-radius: 25px 0 0 25px
-	background: #f28b02
 	.container
 		padding: 5px 5px
 	.month_shifter
+		color: black
 		text-align: center
-		color: white
 		height: 40px
 		line-height: 40px
 		.left
@@ -1041,7 +1042,7 @@
 	.day_wrap
 		width: 14.28571% !important
 		height: 20%
-		margin: 2px 0
+		margin: 7px 0
 		.day
 			line-height: 50px
 			width: 50px
@@ -1059,36 +1060,27 @@
 .info_wrap
 	border-radius: 0 29px 25px 0
 	height: 320px
-	background: #f28b02
 	padding: 0
+	color: black
 	.info
 		overflow-y: auto
 		height: 66.4%
 		.added_day
-			background: #1f2227
-			border-radius: 10px
 			padding: 2px 8px
-			color: white
 			margin: 8px 0
 			width: 97%
-			-webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
-			-moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
-			box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75)
+
 	.chosen_days
-		color: white
 		text-align-last: center
 		height: 50px
 		line-height: 50px
 		font-size: 17px
-		background: #1f2227
 		border-radius: 0 0 0 25px
 	.clear
-		color: white
 		text-align-last: center
 		height: 50px
 		line-height: 50px
 		font-size: 17px
-		background: #1f2227
 		border-radius: 0 25px 0 0
 		cursor: pointer
 		&:hover
@@ -1096,18 +1088,16 @@
 
 	.price
 		height: 18%
-		background: #1f2227
 		border-radius: 25px 0 25px 0
 		font-size: 20px
-		color: white
 		line-height: 56px
 		text-align: center
 
 #activate_promo
 	background: #faa61a
-	height: 40px
+	height: 50px
 	border: none
-	border-radius: 15px
+	border-radius: 30px
 	width: 100%
 	color: white
 	-webkit-box-shadow: 0px 0px 10px -2px rgbasave(0,0,0,0.75)
@@ -1136,3 +1126,32 @@
 	margin-top:	25px
 	border:	none
 	outline:	none	!important
+
+h1
+	font-size: 2.5rem
+	font-family: "mont-heavy"
+
+.inpet
+	width: 100%
+	font-family: "mont-semibold"
+	font-size: 16px
+	color: #787878
+	height: 40px
+	border: none
+	border-bottom: 1px dashed red
+	outline: none
+	margin: 15px 0
+
+.selecter
+	background: #efefef
+	border: none
+	width: 100%
+	height: 40px
+	border-radius: 5px
+
+.perf
+	p
+		margin-top: 30px
+
+.promo_block
+	margin-top: 30px

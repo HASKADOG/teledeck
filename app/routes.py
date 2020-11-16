@@ -217,7 +217,7 @@ def add_add():
 
     a = 1
 
-    return render_template('test.html', current_user=curr, page_width='1920px')
+    return render_template('test.html', current_user=curr, page_width='device-width')
 
 
 @app.route('/lk', methods=['GET', 'POST'])

@@ -11,9 +11,9 @@ def send_email(to, mesg):
     msg.attach(MIMEText(message, 'plain'))
 
     server = smtplib.SMTP('smtp.timeweb.ru:2525')
-    server.login('teledoska@369525-ct08796.tmweb.ru', 'qwe123qwe123')
+    server.login('teledoska@xn--80ahca0adxyd.xn--p1ai', 'TeledeckEfir24')
 
 
 
-    server.sendmail('teledoska@369525-ct08796.tmweb.ru', to_email, msg.as_string())
+    server.sendmail('teledoska@xn--80ahca0adxyd.xn--p1ai', to_email, msg.as_string())
     server.quit()

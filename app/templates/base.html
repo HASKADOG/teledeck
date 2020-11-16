@@ -20,7 +20,7 @@
             <div class="container-xl papka" style="">
                 <div class="row">
                     <div class="col-2 header-logo">
-                        <img src="{{ url_for('static', filename='img/logo_efir_1.png') }}" class="header-logo-file" alt="">
+											<a href="/"><img src="{{ url_for('static', filename='img/logo_efir_1.png') }}" class="header-logo-file" alt=""></a>
                     </div>
                     <div class="col header-space-btw"></div>
                     <div class="header-contact-number">
@@ -107,7 +107,7 @@
 											<div class="container">
 												<div class="row justify-content-between">
 													<div class="col-3 name">выход</div>
-													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30</div>
 												</div>
 											</div>
 										</div>
@@ -115,7 +115,7 @@
 											<div class="container">
 												<div class="row justify-content-between">
 													<div class="col-3 name">выход</div>
-													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30</div>
 												</div>
 											</div>
 
@@ -124,7 +124,24 @@
 											<div class="container">
 												<div class="row justify-content-between">
 													<div class="col-3 name">выход</div>
-													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30, 1 </div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30</div>
+												</div>
+											</div>
+										</div>
+										<div class="row services">
+											<div class="container">
+												<div class="row justify-content-between">
+													<div class="col-3 name">выход</div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="row services">
+											<div class="container">
+												<div class="row justify-content-between">
+													<div class="col-3 name">выход</div>
+													<div class="col-7 amount"><span class="grey">с</span> 5:00 <span class="grey">до</span> 08:30</div>
 												</div>
 											</div>
 										</div>
@@ -138,10 +155,10 @@
 								</div>
 								<div class="col-sm-6 col-md-6 col-lg-1 socials">
 									<div class="col-sm-12 col-12 col-lg-1 col-md-12 social-media">
-										<img src="{{ url_for('static', filename='img/inst_grey.svg') }}" alt="" class="socials-grey">
-										<img src="{{ url_for('static', filename='img/vk_grey.svg') }}" alt="" class="socials-grey">
-										<img src="{{ url_for('static', filename='img/fb_grey.svg') }}" alt="" class="socials-grey">
-										<img src="{{ url_for('static', filename='img/mail_grey.svg') }}" alt="" class="socials-grey">
+										<a href="https://www.instagram.com/utroefir/"><img src="{{ url_for('static', filename='img/inst_grey.svg') }}" alt="" class="socials-grey"></a>
+										<a href="https://vk.com/teledoska"><img src="{{ url_for('static', filename='img/vk_grey.svg') }}" alt="" class="socials-grey"></a>
+										<a href="https://www.facebook.com/efirinfo/"><img src="{{ url_for('static', filename='img/fb_grey.svg') }}" alt="" class="socials-grey"></a>
+										<a href="https://www.youtube.com/watch?v=1i2t8FxGqUc&list=PLw0CNbVt8YUzbi1ZhfKkRZty0IZKcgpyk"><img style="width: 16px" src="{{ url_for('static', filename='img/youtube-brands.svg') }}" alt="" class="socials-grey"></a>
 									</div>
 								</div>
 							</div>
@@ -153,10 +170,9 @@
 								<div class="col col-md-12 col-xl header-menu">
 									<div class="container">
 										<div class="row justify-content-between">
-											<div class="menu-elem elem-one"><span class="one-f">Создать объявление</span></div>
-											<div class="menu-elem elem-two"><span class="two-f">Оплата</span></div>
-											<div class="menu-elem elem-three"><span class="three-f">Продление</span></div>
-											<div class="menu-elem elem-four"><span class="four-f">Редактирование</span></div>
+											<div class="menu-elem elem-one"><span class="one-f"><a style="color: white !important" href="/add_add">Создать объявление</a></span></div>
+											<div class="menu-elem elem-two"><span class="two-f"><a style="color: white !important" href="/payment">Оплата</a></span></div>
+											<div class="menu-elem elem-three"><span class="three-f"><a style="color: white !important" href="/payment">Поиск по трек номеру</a></span></div>
 										</div>
 									</div>
 								</div>
@@ -203,12 +219,14 @@
 
         	<div class="modal fade" id="mmmodality" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
+	    <div class="modal-content"><!--
 	      <div class="modal-header"  style="border: none" style="">
 	        <h5 class="modal-title" id="exampleModalLongTitle">Начало проекта</h5>
 
-	      </div>
+	      </div>-->
 	      <div class="modal-body" style="border: none">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/-XGiofr_mbQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<!--
 	        <form action="" class="modalka" onsubmit="return validate();">
 	        	<div class="container" style="padding: 0;">
 	        		<div class="row">
@@ -247,7 +265,7 @@
 							</div>
 						</div>
 					</div>
-	        </form>
+	        </form>-->
 	      </div>
 	    </div>
 	  </div>

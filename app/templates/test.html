@@ -30,47 +30,59 @@
 <div class="lk-wrap login_reg">
     <div class="container">
         <div class="row">
-            <div class="col-5 login_reg_form" style="margin-bottom: 20px">
-                <h1>Добавить объявление</h1>
+            <div class="col-12 login_reg_form" style="margin-bottom: 20px">
+                <h1 style="padding-left: 15px">Добавить объявление</h1>
                 <input type="text" id="track_code" hidden value="none">
-
-                <p>
-                    <label for="notify_email">Email для уведомлений:</label>
-                    <input type="text" id="notify_email"
-                    {% if current_user.is_authenticated %}
+              <div class="container perf">
+                <div class="row">
+                  <div class="col-4"><p>
+                      <label for="notify_email">Email для уведомлений:</label>
+                      <input type="text" id="notify_email"
+                        {% if current_user.is_authenticated %}
                                value="{{ current_user.email }}"
                         {% endif %}
-                    >
-                </p>
-
-                <p>
+                      >
+                    </p>
+                  </div>
+                  <div class="col-4">
+                    <p>
+                      <label for="phone_number">Номер телефона</label>
+                      <input type="text" id="phone_number">
+                    </p>
+                  </div>
+                  <div class="col-4"><p>
                     <label for="is_entity">Организация?</label><br>
                     <input type="checkbox" style="width: 40px" id="is_entity"
                     {% if current_user.is_authenticated and current_user.is_entity %}
                                checked
                            {% endif %}
                     >
-                </p>
+                  </p></div>
+                </div>
                 <div id="personal_block">
-                    <p>
+                  <div class="row">
+                    <div class="col-4">
+                      <p>
                         <label for="username">Имя</label>
                         <input type="text" id="username"
                         {% if current_user.is_authenticated %}
                                value="{{ current_user.username }}"
                         {% endif %}
                         >
-                    </p>
-
-                    <p>
+                      </p>
+                    </div>
+                    <div class="col-4">
+                      <p>
                         <label for="second_name">Фамилия</label>
                         <input type="text" id="second_name"
                         {% if current_user.is_authenticated %}
                                value="{{ current_user.second_name }}"
                         {% endif %}
                         >
-                    </p>
-
-                    <p>
+                      </p>
+                    </div>
+                    <div class="col-4">
+                      <p>
                         <label for="third_name">Отчество</label>
                         <input type="text" id="third_name"
                         {% if current_user.is_authenticated %}
@@ -78,10 +90,12 @@
                         {% endif %}
                         >
                     </p>
-
+                    </div>
+                  </div>
                 </div>
-
                 <div id="entity_block">
+                  <div class="row">
+                  <div class="col-4">
                     <p>
                         <label for="entity_name">Наименование организации</label>
                         <input type="text" id="entity_name"
@@ -90,7 +104,8 @@
                         {% endif %}
                         >
                     </p>
-
+                  </div>
+                  <div class="col-4">
                     <p>
                         <label for="iin">ИИН</label>
                         <input type="text" id="iin"
@@ -99,7 +114,8 @@
                         {% endif %}
                         >
                     </p>
-
+                  </div>
+                  <div class="col-4">
                     <p>
                         <label for="ogrn">ОГРН</label>
                         <input type="text" id="ogrn"
@@ -108,39 +124,32 @@
                         {% endif %}
                         >
                     </p>
-                </div>
-                <p>
-                    <label for="phone_number">Номер телефона</label>
-                    <input type="text" id="phone_number">
-                </p>
+                  </div>
+                  </div>
 
-                <div class="container promo_wrap"  style="padding-left: 0">
-                    <div class="row" style="padding: 0">
-                        <div class="col-7">
+                </div>
+                <div class="row promo_block">
+                  <div class="col-4">
                             <input type="text" id="promo" placeholder="Промокод">
-                        </div>
-                        <div class="col-5"  style="padding: 0">
+                  </div>
+                  <div class="col-lg-4 col-6">
                             <button id="activate_promo">Активировать</button>
-                        </div>
-                        {% if current_user.is_authenticated and current_user.collected_m > 0 %}
+                  </div>
+                  <div class="col-4">
+                    {% if current_user.is_authenticated and current_user.collected_m > 0 %}
                         <div class="col-12">
                             У вас есть {{ current_user.collected_m }} бонусных ₽, которые вы можете списать при оплате
                         </div>
                         {% endif %}
-                    </div>
+                  </div>
                 </div>
-
-
-
-
-
+              </div>
 
 
                 </div>
-                <div class="col-7"></div>
-                                    <div class="container" style="transform: translateX(11px)">
-                      <div class="row" style="width: 1192px !important">
-                        <div class="col-4 calendar">
+                                    <div class="container" style="transform: translateX(11px); margin: 30px 0">
+                      <div class="row justify-content-md-center">
+                        <div class="col-lg-5 col-sm-12 calendar">
                           <div class="container">
                             <div class="row month_shifter">
                               <div class="col-1 left">«</div>
@@ -256,7 +265,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4 info_wrap">
+                        <div class="col-lg-5 col-sm-12 info_wrap">
                           <!--<div class="added_day" id='day12_picked'>day12</div>-->
                             <div class="container">
                                 <div class="row">
@@ -273,65 +282,97 @@
                           </div>
                         </div>
                       </div>
+
                     </div>
 
-                <div class="col-4 login_reg_form image_form">
-                <label for="font-choose">Шрифт:</label>
-<select id="font-choose" onchange="draw_text()">
-  <option value="annonymous" class="annonymous" selected>AnonymousPro</option>
-  <option value="arimo" class="arimo">Arimo</option>
-  <option value="cousine" class="cousine">Cousine</option>
-  <option value="cuprum" class="cuprum">Cuprum</option>
-  <option value="opensans" class="opensans">OpenSansCondensed</option>
-  <option value="philosopher" class="philosopher">Philosopher</option>
-</select><br>
-                <label for="template-choose">Шаблон:</label>
+          <div class="col-5">
+            <label for="font-choose">Шрифт:</label>
+              <select id="font-choose" class="selecter" onchange="draw_text()">
+                <option value="annonymous" class="annonymous" selected>AnonymousPro</option>
+                <option value="arimo" class="arimo">Arimo</option>
+                <option value="cousine" class="cousine">Cousine</option>
+                <option value="cuprum" class="cuprum">Cuprum</option>
+                <option value="opensans" class="opensans">OpenSansCondensed</option>
+                <option value="philosopher" class="philosopher">Philosopher</option>
+              </select><br>
+          </div>
+          <div class="col-2">
 
-<select id="template-choose" onChange="render(this, 0); draw_text(); sec_tmp()">
-  <option value="one" class="mont-b" selected>One</option>
-  <option value="two" class="mont-r">Two</option>
-  <option value="three" class="mont-b">Three</option>
-  <option value="four" class="mont-r">Four</option>
-</select><br>
+          </div>
+          <div class="col-5">
+            <label for="template-choose">Шаблон:</label>
 
-                    <label id="image_in_lb" for="image_in">Загрузить файл (1680*570)</label>
+            <select id="template-choose" class="selecter" onChange="render(this, 0); draw_text(); sec_tmp()">
+              <option value="one" class="mont-b" selected>One</option>
+              <option value="two" class="mont-r">Two</option>
+              <option value="three" class="mont-b">Three</option>
+              <option value="four" class="mont-r">Four</option>
+            </select><br>
+          </div>
+
+          <div class="col-5">
+            <input type="text" id="head" class="inpet" onchange="onfil(document.getElementById('image'))" placeholder="Заголовок"><br>
+            <select class="selecter" id="head-weight" onChange="change_weight(); draw_text()">
+              <option value="" class="head-regular" selected>Обычный</option>
+              <option value="-bold" class="head-bold">Жирный</option>
+              <option value="-italic" class="head-italic">Курсив</option>
+            </select>
+            <br>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5">
+            <label id="image_in_lb" for="image_in">Загрузить файл (1680*570)</label>
 <input type="file" style="border: none; margin-top: 10px" hidden onChange="merge()" data-buttonText="Загрузить картинку" id="image_in"><br>
+          </div>
 
-<input type="text" id="head" onchange="onfil(document.getElementById('image'))" placeholder="Заголовок">
-<select id="head-weight" onChange="change_weight(); draw_text()">
-  <option value="" class="head-regular" selected>Обычный</option>
-  <option value="-bold" class="head-bold">Жирный</option>
-  <option value="-italic" class="head-italic">Курсив</option>
-</select>
-<br>
-<input type="text" id="text_in_red" class="font-hider" onchange="onfil(document.getElementById('image'))" placeholder="Текст в красном">
-<select id="text_in_red-weight" class="font-hider" onChange="change_weight(); draw_text()">
-  <option value="" class="text_in_red-regular" selected>Обычный</option>
-  <option value="-bold" class="text_in_red-bold">Жирный</option>
-  <option value="-italic" class="text_in_red-italic">Курсив</option>
-</select>
-<br id="red_br" class="font-hider">
-<input type="text" id="body" onchange="onfil(document.getElementById('image'))" placeholder="Текст">
-<select id="body-weight" onChange="change_weight(); draw_text()">
-  <option value="" class="body-regular" selected>Обычный</option>
-  <option value="-bold" class="body-bold">Жирный</option>
-  <option value="-italic" class="body-italic">Курсив</option>
-</select>
-<br>
-<input type="text" id="legs" onchange="onfil(document.getElementById('image'))" placeholder="Текст 2">
-<select id="legs-weight" onChange="change_weight(); draw_text()">
-  <option value="" class="legs-regular" selected>Обычный</option>
-  <option value="-bold" class="legs-bold">Жирный</option>
-  <option value="-italic" class="legs-italic">Курсив</option>
-</select>
-<br>
-                    <label id="image_uniq_lb" for="image_uniq">Загрузить своё объявление (1920*1080)</label>
-<input type="file" style="border: none; margin-top: 10px" hidden onChange="uniq()" data-buttonText="Загрузить картинку" id="image_uniq"><br>
-<input type="text" hidden class="link" value="">
+          <div class="col-5">
+            <input type="text" id="body" class="inpet" onchange="onfil(document.getElementById('image'))" placeholder="Текст"><br>
+            <select class="selecter" id="body-weight" onChange="change_weight(); draw_text()">
+              <option value="" class="body-regular" selected>Обычный</option>
+              <option value="-bold" class="body-bold">Жирный</option>
+              <option value="-italic" class="body-italic">Курсив</option>
+            </select>
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5">
+            <input type="text" id="legs" class="inpet" onchange="onfil(document.getElementById('image'))" placeholder="Текст 2"><br>
+            <select id="legs-weight" class="selecter" onChange="change_weight(); draw_text()">
+              <option value="" class="legs-regular" selected>Обычный</option>
+              <option value="-bold" class="legs-bold">Жирный</option>
+              <option value="-italic" class="legs-italic">Курсив</option>
+            </select>
+          </div>
+          <div class="col-5">
+            <input type="text" id="text_in_red" class="font-hider inpet" onchange="onfil(document.getElementById('image'))" placeholder="Текст в красном"><br id="red_br" class="font-hider">
+            <select id="text_in_red-weight" class="font-hider selecter" onChange="change_weight(); draw_text()">
+              <option value="" class="text_in_red-regular" selected>Обычный</option>
+              <option value="-bold" class="text_in_red-bold">Жирный</option>
+              <option value="-italic" class="text_in_red-italic">Курсив</option>
+            </select>
+            <label id="image_uniq_lb" for="image_uniq">Загрузить своё объявление (1920*1080)</label>
+            <input type="file" style="border: none; margin-top: 10px" hidden onChange="uniq()" data-buttonText="Загрузить картинку" id="image_uniq"><br>
+            <input type="text" hidden class="link" value="">
+          </div>
+          <div class="col-2"></div>
+          <div class="col-5"></div>
 
-</div>                <div class="col-8">
-                <canvas id="img" style="width: 100%; margin-top: 10px"></canvas><br></div>
-            <div class="col-5">                                                    <button id="moderate">Отправить на модерацию</button>
+                <div class="col-12 login_reg_form image_form">
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+</div>                <div class="col-12 col-lg-8">
+                <canvas id="img" style="width: 100%; margin-top: 10px; border-radius: 5px"></canvas><br></div>
+            <div class="col-1s2 col-lg-4">                                                    <button id="moderate">Отправить на модерацию</button>
 </div>
 
             </div>
