@@ -1,0 +1,129 @@
+.apply {
+  transition: 0.3s; }
+  .apply:hover {
+    background-color: #DF910F !important; }
+
+.menu-elem {
+  position: relative; }
+
+.one {
+  display: inline-block; }
+  .one:hover {
+    color: #282828 !important; }
+    .one:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 44% !important; }
+
+.two {
+  display: inline-block; }
+  .two:hover {
+    color: #282828 !important; }
+    .two:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 33% !important; }
+
+.three {
+  display: inline-block; }
+  .three:hover {
+    color: #282828 !important; }
+    .three:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 39% !important; }
+
+.four {
+  display: inline-block; }
+  .four:hover {
+    color: #282828 !important; }
+    .four:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 40% !important; }
+
+.one-f {
+  display: inline-block; }
+  .one-f:hover {
+    color: #fff !important; }
+    .one-f:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 44% !important; }
+
+.two-f {
+  display: inline-block; }
+  .two-f:hover {
+    color: #fff !important; }
+    .two-f:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 33% !important; }
+
+.three-f {
+  display: inline-block; }
+  .three-f:hover {
+    color: #fff !important; }
+    .three-f:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 39% !important; }
+
+.four-f {
+  display: inline-block; }
+  .four-f:hover {
+    color: #fff !important; }
+    .four-f:hover:before {
+      content: "";
+      border-radius: 28%;
+      width: 20px;
+      height: 3px;
+      background-color: #F28B02;
+      display: inline-block;
+      position: absolute;
+      top: 42px !important;
+      left: 40% !important; }
+
+/*# sourceMappingURL=animations.css.map */

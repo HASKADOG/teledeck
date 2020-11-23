@@ -44,10 +44,58 @@
   font-family: "mont-thin";
   src: url("../fonts/Mont-Thin.ttf"); }
 @font-face {
-  font-family: "mont-thin-italic";
-  src: url("../fonts/Mont-LightItalic.ttf.ttf"); }
+  font-family: "annonymous";
+  src: url("../template_fonts/AnonymousPro-Regular.ttf"); }
 @font-face {
-  font-family: "test";
-  src: url("../fonts/Lemonada-VariableFont_wght.ttf"); }
+  font-family: "annonymous-bold";
+  src: url("../template_fonts/AnonymousPro-Bold.ttf"); }
+@font-face {
+  font-family: "annonymous-italic";
+  src: url("../template_fonts/AnonymousPro-Italic.ttf"); }
+@font-face {
+  font-family: "arimo";
+  src: url("../template_fonts/Arimo-Regular.ttf"); }
+@font-face {
+  font-family: "arimo-bold";
+  src: url("../template_fonts/Arimo-Bold.ttf"); }
+@font-face {
+  font-family: "arimo-italic";
+  src: url("../template_fonts/Arimo-Italic.ttf"); }
+@font-face {
+  font-family: "cousine";
+  src: url("../template_fonts/Cousine-Regular.ttf"); }
+@font-face {
+  font-family: "cousine-bold";
+  src: url("../template_fonts/Cousine-Bold.ttf"); }
+@font-face {
+  font-family: "cousine-italic";
+  src: url("../template_fonts/Cousine-Italic.ttf"); }
+@font-face {
+  font-family: "cuprum";
+  src: url("../template_fonts/Cuprum-Regular.ttf"); }
+@font-face {
+  font-family: "cuprum-bold";
+  src: url("../template_fonts/Cuprum-Bold.ttf"); }
+@font-face {
+  font-family: "cuprum-italic";
+  src: url("../template_fonts/Cuprum-Italic.ttf"); }
+@font-face {
+  font-family: "opensans";
+  src: url("../template_fonts/OpenSansCondensed-Light.ttf"); }
+@font-face {
+  font-family: "opensans-bold";
+  src: url("../template_fonts/OpenSansCondensed-Bold.ttf"); }
+@font-face {
+  font-family: "opensans-italic";
+  src: url("../template_fonts/OpenSansCondensed-LightItalic.ttf"); }
+@font-face {
+  font-family: "philosopher";
+  src: url("../template_fonts/Philosopher-Regular.ttf"); }
+@font-face {
+  font-family: "philosopher-bold";
+  src: url("../template_fonts/Philosopher-Regular.ttf"); }
+@font-face {
+  font-family: "philosopher-italic";
+  src: url("../template_fonts/Philosopher-Italic.ttf"); }
 
 /*# sourceMappingURL=fonts.css.map */

@@ -1,4 +1,4 @@
-#!/home/haska/Work/teledeck/venv/bin/python
+#!/home/haska/work/teledeck/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
