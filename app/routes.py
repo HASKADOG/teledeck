@@ -125,7 +125,7 @@ def registration():
             return redirect('/registration?msg=Неверные данные или Email уже зарегистрирован')
         print('done')
         print(form.email.data)
-        send_email(form.email.data, 'Ваш аккаунт на теледоска.рф успешно зарегистрирован!')
+        send_email(form.email.data, 'Ваш аккаунт на теледоска.рф успешно зарегистрирован!', 'Успешная регистрация на Теледоске')
 
 
 
@@ -178,7 +178,7 @@ def add_add():
         }
 
         img = data['image'].split(',')[1]
-        with open('/home/haska/Work/teledeck/app/static/users_ads/{}.png'.format(track_code), "wb") as fh:
+        with open('/home/haska/work/teledeck/app/static/users_ads/{}.png'.format(track_code), "wb") as fh:
             fh.write(base64.decodebytes(bytes(img, 'utf-8')))
         print(img)
         a = 2
@@ -200,7 +200,7 @@ def add_add():
         db.session.commit()
         # db.session.add(time_to)
         db.session.commit()
-        send_email(notify_email, 'Объявление {} успешно создано! После модерации Вам поступит уведомление'.format(track_code))
+        send_email(notify_email, 'Объявление {} успешно создано! После модерации Вам поступит уведомление'.format(track_code), 'Успешное создание объявления на Теледоске')
         return jsonify({'response': 'Отправлено на модерацию. Трек-код: {}'.format(track_code)})
 
     curr = current_user
@@ -302,7 +302,7 @@ def lk():
 
         db.session.add(user)
         db.session.commit()
-        send_email(user.email, 'Ваш аккаунт на теледоска.рф успешно обновлен')
+        send_email(user.email, 'Ваш аккаунт на теледоска.рф успешно обновлен', 'Успешное обновление аккаунта на Теледоске')
         print()
         return jsonify({'response': 'Успешно обновлено!'})
 
@@ -489,7 +489,7 @@ def approve():
         db.session.commit()
         db.session.add(history)
         db.session.commit()
-        send_email(paid_ad.notify_email, 'Оплата объявления {} на сумму {}₽ прошла успешно'.format(request.json['object']['metadata']['track'], request.json['object']['amount']['value'].split('.')[0]))
+        send_email(paid_ad.notify_email, 'Оплата объявления {} на сумму {}₽ прошла успешно'.format(request.json['object']['metadata']['track'], request.json['object']['amount']['value'].split('.')[0]), 'Успешная оплата на Теледоске')
         print()
         print('payment.succeeded')
         a = 1
@@ -502,7 +502,7 @@ def cancel(track):
     ad.status = 71
     db.session.add(ad)
     db.session.commit()
-    send_email(ad.notify_email,'Объявление {} ожидает отмены'.format(ad.track))
+    send_email(ad.notify_email,'Объявление {} ожидает отмены'.format(ad.track), 'Отмена объявления на Теледоске')
     print('{} canceled'.format(ad.track))
     return redirect(url_for('payment'))
 
@@ -512,7 +512,7 @@ def moderate(track):
     ad.status = 1
     db.session.add(ad)
     db.session.commit()
-    send_email(ad.notify_email, 'Объявление {} возвращено на модерацию'.format(ad.track))
+    send_email(ad.notify_email, 'Объявление {} возвращено на модерацию'.format(ad.track), 'Повторная модерация на Теледоске')
     return redirect(url_for('payment'))
 
 @app.route('/restore_password', methods=['POST', 'GET'])
@@ -537,7 +537,7 @@ def restore_password():
             token = Restore_tokens(date_expires=now + timedelta(days=1), token=hex, account_to_restore=user)
             db.session.add(token)
             db.session.commit()
-            send_email(user.email, 'Ссылка для восстановления пароля: https://теледоска.рф/password_restoration/{}'.format(hex))
+            send_email(user.email, 'Ссылка для восстановления пароля: https://теледоска.рф/password_restoration/{}'.format(hex), 'Восстановление пароля от Теледоски')
             incorrect = '<script>alert("Ссылка на восстановление пароля отправлена на Вашу почту");</script>'
             return render_template('restore_password.html', form=form, incorrect=incorrect)
         else:

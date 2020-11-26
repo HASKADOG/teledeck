@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="alchemy@localhost [2]" uuid="d1ca5e82-e4e1-4248-bd06-519431f211f4">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/alchemy</jdbc-url>
-      <driver-properties>
-        <property name="serverTimezone" value="UTC" />
-      </driver-properties>
-    </data-source>
-    <data-source source="LOCAL" name="EFIR" uuid="44303a4e-b569-4224-9b68-b500c05dee7d">
+    <data-source source="LOCAL" name="alchemy@91.210.171.60" uuid="e20d5ffa-7ee5-4cd5-b745-971f1aa5ceb0">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://91.210.171.60:3306/alchemy</jdbc-url>
       <driver-properties>
-        <property name="serverTimezone" value="UTC" />
+        <property name="serverTimezone" value="GMT" />
       </driver-properties>
     </data-source>
   </component>

@@ -2,11 +2,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_email(to, mesg):
+def send_email(to, mesg, subj):
     msg = MIMEMultipart()
 
     to_email = to
     message = mesg
+
+    msg['Subject'] = subj
 
     msg.attach(MIMEText(message, 'plain'))
 
